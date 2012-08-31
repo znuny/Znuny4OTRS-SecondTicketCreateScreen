@@ -12,6 +12,9 @@ Configuration
 =============
 Via SysConfig like for the normal phone and email tickets.
 
+ Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewPhoneNewSecond
+ Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewEmailSecondNew 
+
 Installation
 ============
 Download the package and install it via admin interface -> package manager.

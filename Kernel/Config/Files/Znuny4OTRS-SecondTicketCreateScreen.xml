@@ -243,7 +243,7 @@
         <Setting>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::ToolBarLink</Item>
-                <Item Key="Name">New email ticket</Item>
+                <Item Key="Name">New email ticket 2</Item>
                 <Item Key="Link">Action=AgentTicketEmailSecond</Item>
                 <Item Key="Action">AgentTicketEmailSecond</Item>
                 <Item Key="AccessKey">l</Item>
