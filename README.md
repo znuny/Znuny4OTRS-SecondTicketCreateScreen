@@ -24,7 +24,7 @@ Prerequisites
 
 Download
 ========
-For download see https://github.com/znuny/Znuny4OTRS-SecondTicketCreateScreen/downloads/
+For download see http://znuny.com/d/
 
 Commercial Support
 ==================
