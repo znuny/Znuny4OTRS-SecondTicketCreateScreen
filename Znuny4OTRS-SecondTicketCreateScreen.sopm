@@ -5,8 +5,8 @@
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
-    <Description Lang="en">A seconde ticket create screen (phone and email ticket) to configure with own config settings.</Description>
-    <Description Lang="de">Eine zusätzlich Ticket Erstell Maske (Telefon- und Email-Ticket) welche unabhängig konfiguriert werden kann.</Description>
+    <Description Lang="en">A second ticket create screen (phone and email ticket) to configure with own config settings.</Description>
+    <Description Lang="de">Eine zusätzliche Ticket Erstellmaske (Telefon- und Email-Ticket) welche unabhängig konfiguriert werden kann.</Description>
     <Framework>3.1.x</Framework>
     <Filelist>
         <File Location="Kernel/Config/Files/Znuny4OTRS-SecondTicketCreateScreen.xml" Permission="644"/>
