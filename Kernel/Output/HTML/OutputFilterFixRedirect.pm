@@ -2,8 +2,6 @@
 # Kernel/Output/HTML/OutputFilterFixRedirect.pm - fix redirect 
 # Copyright (C) 2012 Znuny GmbH, http://znuny.com/
 # --
-# $Id: $
-# --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
@@ -46,7 +44,10 @@ sub Run {
     return $Param{Data} if $Param{TemplateFile} !~ /^redirect/i;
 
     # return if it's not email or phone ticket
-    return $Param{Data} if $Self->{LayoutObject}->{Action} !~ /^AgentTicket(Phone|Email)/; 
+    return $Param{Data} if $Self->{LayoutObject}->{Action} !~ /^AgentTicket(Phone|Email)/;
+
+    # do not redirect CTI called redirect's
+    return $Param{Data} if $Self->{LayoutObject}->{Action} =~ /CTI/;
 
     # return if redirect is not to create screen again
     return $Param{Data} if $Self->{LayoutObject}->{UserCreateNextMask} && $Self->{LayoutObject}->{UserCreateNextMask} =~ /^(AgentTicketZoom|AgentZoom)/;
