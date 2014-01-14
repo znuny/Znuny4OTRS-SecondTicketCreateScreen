@@ -48,8 +48,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             $('#CustomerInfo .Content').html(Response.CustomerTableHTMLString);
 
             // only execute this part, if in AgentTicketEmail or AgentTicketPhone
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
 //            if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') {
             if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone' || Core.Config.Get('Action') === 'AgentTicketPhoneSecond' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' ) {
+//---
                 // reset service
                 $('#ServiceID').attr('selectedIndex', 0);
                 // update services (trigger ServiceID change event)

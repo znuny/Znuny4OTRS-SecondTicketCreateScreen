@@ -1,19 +1,12 @@
 # --
-# Kernel/Output/HTML/OutputFilterFixRedirect.pm - fix redirect 
-# Copyright (C) 2012 Znuny GmbH, http://znuny.com/
-# --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (AGPL). If you
-# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# Kernel/Output/HTML/OutputFilterFixRedirect.pm - fix redirect
+# Copyright (C) 2014 Znuny GmbH, http://znuny.com/
 # --
 
 package Kernel::Output::HTML::OutputFilterFixRedirect;
 
 use strict;
 use warnings;
-
-use vars qw(@ISA $VERSION);
-$VERSION = qw($Revision: 1.0 $) [1];
 
 sub new {
     my ( $Type, %Param ) = @_;

@@ -1,14 +1,14 @@
-![Znuny logo](http://znuny.com/assets/logo_small.png) 
+![Znuny logo](http://znuny.com/assets/logo_small.png)
 
 Znuny4OTRS-SecondTicketCreateScreen
 ===================================
-Provides a second phone and email ticket create screen with their own config settings.
+Provides a second phone and email ticket create screen with their own SysConfig settings.
 
 
 **Feature List**
 
-* provide second phone ticket screen 
-* provide second email ticket screen 
+* provide second phone ticket screen
+* provide second email ticket screen
 
 
 **Prerequisites**
@@ -21,6 +21,8 @@ Provides a second phone and email ticket create screen with their own config set
 
 - OTRS 3.2
 
+- OTRS 3.3
+
 **Installation**
 
 Download the package and install it via admin interface -> package manager or use Znuny4OTRS-Repo.
@@ -31,11 +33,11 @@ Download the package and install it via admin interface -> package manager or us
 Via SysConfig just like for the normal phone and email tickets.
 
 * Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewPhoneNewSecond
-* Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewEmailSecondNew 
+* Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewEmailSecondNew
 
 **Download**
 
-For download see [http://znuny.com/d/](http://znuny.com/d/)
+For download see [http://znuny.com/en/#!/addons](http://znuny.com/en/#!/addons)
 
 **Commercial Support**
 
