@@ -23,6 +23,8 @@ Provides a second phone and email ticket create screen with their own SysConfig 
 
 - OTRS 3.3
 
+- OTRS 4
+
 **Installation**
 
 Download the package and install it via admin interface -> package manager or use Znuny4OTRS-Repo.
@@ -48,4 +50,3 @@ Enjoy!
  Your Znuny Team!
 
  [http://znuny.com](http://znuny.com)
-

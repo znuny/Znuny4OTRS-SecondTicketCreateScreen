@@ -1,8 +1,8 @@
 // --
 // Core.Agent.CustomerSearch.js - provides the special module functions for the customer search
-// Copyright (C) 2001-2012 OTRS AG, http://otrs.org/
+// Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
 // --
-// $Id: Core.Agent.CustomerSearch.js,v 1.33.2.7 2012/06/14 12:55:36 mg Exp $
+// $origin: https://github.com/OTRS/otrs/blob/63e18b949eb6525e61eb62cfad6af02cd4713501/var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -25,7 +25,9 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         CustomerInfo: '',
         CustomerEmail: '',
         CustomerKey: ''
-    };
+    },
+        // Needed for the change event of customer fields, if ActiveAutoComplete is false (disabled)
+        CustomerFieldChangeRunCount = {};
 
     /**
      * @function
@@ -37,12 +39,15 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         var Data = {
             Action: 'AgentCustomerSearch',
             Subaction: 'CustomerInfo',
-            CustomerUserID: CustomerUserID || 1
+            CustomerUserID: CustomerUserID
         };
         Core.AJAX.FunctionCall(Core.Config.Get('Baselink'), Data, function (Response) {
             // set CustomerID
             $('#CustomerID').val(Response.CustomerID);
             $('#ShowCustomerID').html(Response.CustomerID);
+
+            // Publish information for subscribers
+            Core.App.Publish('Event.Agent.CustomerSearch.GetCustomerInfo.Callback', [Response.CustomerID]);
 
             // show customer info
             $('#CustomerInfo .Content').html(Response.CustomerTableHTMLString);
@@ -59,6 +64,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                 // update services (trigger ServiceID change event)
                 Core.AJAX.FormUpdate($('#CustomerID').closest('form'), 'AJAXUpdate', 'ServiceID', ['Dest', 'SelectedCustomerUser', 'NextStateID', 'PriorityID', 'ServiceID', 'SLAID', 'CryptKeyID', 'OwnerAll', 'ResponsibleAll', 'TicketFreeText1', 'TicketFreeText2', 'TicketFreeText3', 'TicketFreeText4', 'TicketFreeText5', 'TicketFreeText6', 'TicketFreeText7', 'TicketFreeText8', 'TicketFreeText9', 'TicketFreeText10', 'TicketFreeText11', 'TicketFreeText12', 'TicketFreeText13', 'TicketFreeText14', 'TicketFreeText15', 'TicketFreeText16']);
             }
+            if (Core.Config.Get('Action') === 'AgentTicketProcess'){
+                // reset service
+                $('#ServiceID').attr('selectedIndex', 0);
+                // update services (trigger ServiceID change event)
+                Core.AJAX.FormUpdate($('#CustomerID').closest('form'), 'AJAXUpdate', 'ServiceID', Core.Config.Get('ProcessManagement.UpdatableFields') );
+            }
         });
     }
 
@@ -70,7 +81,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
      */
     function GetCustomerTickets(CustomerUserID, CustomerID) {
         // check if customer tickets should be shown
-        if (!parseInt(Core.Config.Get('Autocomplete.ShowCustomerTickets'), 10)) {
+        if (!parseInt(Core.Config.Get('CustomerSearch.ShowCustomerTickets'), 10)) {
             return;
         }
 
@@ -88,6 +99,8 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
          *      This function replace and show customer ticket links
          */
         function ReplaceCustomerTicketLinks() {
+            var ResizeTimeoutWindow;
+
             $('#CustomerTickets').find('.AriaRoleMain').removeAttr('role').removeClass('AriaRoleMain');
 
             // Replace overview mode links (S, M, L view), pagination links with AJAX
@@ -112,9 +125,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             Core.UI.Accordion.Init($('.Preview > ul'), 'li h3 a', '.HiddenBlock');
 
             // Init table functions
-            if ($('#FixedTable').length) {
-                Core.UI.InitTableHead($('#FixedTable thead'), $('#FixedTable tbody'));
-                Core.UI.StaticTableControl($('#OverviewControl').add($('#OverviewBody')));
+            if ($('#TicketList table').length) {
                 Core.UI.Table.InitCSSPseudoClasses();
             }
 
@@ -146,7 +157,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
     function CheckPhoneCustomerCountLimit() {
 
         // Only operate in AgentTicketPhone
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//        if ( Core.Config.Get('Action') !== 'AgentTicketPhone' ) {
         if ( Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' ) {
+//---
             return;
         }
 
@@ -167,26 +183,23 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
     /**
      * @function
      * @param {jQueryObject} $Element The jQuery object of the input field with autocomplete
-     * @param {Boolean} ActiveAutoComplete Set to false, if autocomplete should only be started by click on a button next to the input field
      * @return nothing
      *      This function initializes the special module functions
      */
-    TargetNS.Init = function ($Element, ActiveAutoComplete) {
+    TargetNS.Init = function ($Element) {
         // get customer tickets for AgentTicketCustomer
         if (Core.Config.Get('Action') === 'AgentTicketCustomer') {
             GetCustomerTickets($('#CustomerAutoComplete').val(), $('#CustomerID').val());
         }
 
         // get customer tickets for AgentTicketPhone and AgentTicketEmail
-        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone' || Core.Config.Get('Action') === 'AgentTicketPhoneSecond' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' ) && $('#SelectedCustomerUser').val() !== '') {
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') && $('#SelectedCustomerUser').val() !== '') {
+        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') && $('#SelectedCustomerUser').val() !== '' || Core.Config.Get('Action') === 'AgentTicketPhoneSecond' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' ) {
+//---
             GetCustomerTickets($('#SelectedCustomerUser').val());
-        }
-
-        if (typeof ActiveAutoComplete === 'undefined') {
-            ActiveAutoComplete = true;
-        }
-        else {
-            ActiveAutoComplete = !!ActiveAutoComplete;
         }
 
         // just save the initial state of the customer info
@@ -195,78 +208,97 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         }
 
         if (isJQueryObject($Element)) {
-            $Element.autocomplete({
-                minLength: ActiveAutoComplete ? Core.Config.Get('Autocomplete.MinQueryLength') : 500,
-                delay: Core.Config.Get('Autocomplete.QueryDelay'),
-                source: function (Request, Response) {
-                    var URL = Core.Config.Get('Baselink'), Data = {
-                        Action: 'AgentCustomerSearch',
-                        Term: Request.term,
-                        MaxResults: Core.Config.Get('Autocomplete.MaxResultsDisplayed')
-                    };
-                    Core.AJAX.FunctionCall(URL, Data, function (Result) {
-                        var Data = [];
-                        $.each(Result, function () {
-                            Data.push({
-                                label: this.CustomerValue + " (" + this.CustomerKey + ")",
-                                // customer list representation (see CustomerUserListFields from Defaults.pm)
-                                value: this.CustomerValue,
-                                // customer user id
-                                key: this.CustomerKey
-                            });
-                        });
-                        Response(Data);
-                    });
-                },
-                select: function (Event, UI) {
-                    var CustomerKey = UI.item.key,
-                        CustomerValue = UI.item.value;
-
-                    BackupData.CustomerKey = CustomerKey;
-                    BackupData.CustomerEmail = CustomerValue;
-
-                    if (Core.Config.Get('Action') === 'AgentBook') {
-                        $('#' + $(this).attr('id')).val(CustomerValue);
-                        return false;
-                    }
-
-                    $Element.val(CustomerValue);
-
-                    if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' || Core.Config.Get('Action') === 'AgentTicketCompose' ) {
-                        $Element.val('');
-                    }
-
-                    if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmailSecond' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose') {
-                        // set hidden field SelectedCustomerUser
-                        $('#SelectedCustomerUser').val(CustomerKey);
-
-                        // needed for AgentTicketCustomer.pm
-                        if ($('#CustomerUserID').length) {
-                            $('#CustomerUserID').val(CustomerKey);
-                            if ($('#CustomerUserOption').length) {
-                                $('#CustomerUserOption').val(CustomerKey);
-                            }
-                            else {
-                                $('<input type="hidden" name="CustomerUserOption" id="CustomerUserOption">').val(CustomerKey).appendTo($Element.closest('form'));
-                            }
-                        }
-
-                        // get customer tickets
-                        GetCustomerTickets(CustomerKey);
-
-                        // get customer data for customer info table
-                        GetCustomerInfo(CustomerKey);
-                    }
-                    else {
-                        TargetNS.AddTicketCustomer($(this).attr('id'), CustomerValue, CustomerKey);
-                    }
-
-                    Event.preventDefault();
-                    return false;
-                }
+            // Hide tooltip in autocomplete field, if user already typed something to prevent the autocomplete list
+            // to be hidden under the tooltip. (Only needed for serverside errors)
+            $Element.unbind('keyup.Validate').bind('keyup.Validate', function () {
+               var Value = $Element.val();
+               if ($Element.hasClass('ServerError') && Value.length) {
+                   $('#OTRS_UI_Tooltips_ErrorTooltip').hide();
+               }
             });
 
-            if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose') {
+            Core.UI.Autocomplete.Init($Element, function (Request, Response) {
+                var URL = Core.Config.Get('Baselink'),
+                    Data = {
+                        Action: 'AgentCustomerSearch',
+                        Term: Request.term,
+                        MaxResults: Core.UI.Autocomplete.GetConfig('MaxResultsDisplayed')
+                    };
+
+                $Element.data('AutoCompleteXHR', Core.AJAX.FunctionCall(URL, Data, function (Result) {
+                    var Data = [];
+                    $Element.removeData('AutoCompleteXHR');
+                    $.each(Result, function () {
+                        Data.push({
+                            label: this.CustomerValue + " (" + this.CustomerKey + ")",
+                            // customer list representation (see CustomerUserListFields from Defaults.pm)
+                            value: this.CustomerValue,
+                            // customer user id
+                            key: this.CustomerKey
+                        });
+                    });
+                    Response(Data);
+                }));
+            }, function (Event, UI) {
+                var CustomerKey = UI.item.key,
+                    CustomerValue = UI.item.value;
+
+                BackupData.CustomerKey = CustomerKey;
+                BackupData.CustomerEmail = CustomerValue;
+
+                if (Core.Config.Get('Action') === 'AgentBook') {
+                    $(Event.target).val(CustomerValue);
+                    return false;
+                }
+
+                $Element.val(CustomerValue);
+
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//                if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') {
+                if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') {
+//---
+                    $Element.val('');
+                }
+
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//                if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound') {
+                if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmailSecond' ) {
+//---
+                    // set hidden field SelectedCustomerUser
+                    $('#SelectedCustomerUser').val(CustomerKey);
+
+                    // needed for AgentTicketCustomer.pm
+                    if ($('#CustomerUserID').length) {
+                        $('#CustomerUserID').val(CustomerKey);
+                        if ($('#CustomerUserOption').length) {
+                            $('#CustomerUserOption').val(CustomerKey);
+                        }
+                        else {
+                            $('<input type="hidden" name="CustomerUserOption" id="CustomerUserOption">').val(CustomerKey).appendTo($Element.closest('form'));
+                        }
+                    }
+
+                    // get customer tickets
+                    GetCustomerTickets(CustomerKey);
+
+                    // get customer data for customer info table
+                    GetCustomerInfo(CustomerKey);
+                }
+                else {
+                    TargetNS.AddTicketCustomer($(Event.target).attr('id'), CustomerValue, CustomerKey);
+                }
+            }, 'CustomerSearch');
+
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//            if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound') {
+            if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmailSecond' ) {
+//---
                 $Element.blur(function () {
                     var FieldValue = $(this).val();
                     if (FieldValue !== BackupData.CustomerEmail && FieldValue !== BackupData.CustomerKey) {
@@ -279,16 +311,9 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                         // reset customer info table
                         $('#CustomerInfo .Content').html(BackupData.CustomerInfo);
 
-                        // reload Crypt options on AgentTicketForward
-                        if ( Core.Config.Get('Action') === 'AgentTicketForward' && $('#CryptKeyID').length) {
-                            Core.AJAX.FormUpdate($Element.closest('form'), 'AJAXUpdate', '', ['CryptKeyID']);
-                        }
-                    }
-                    else if (!FieldValue && !BackupData.CustomerEmail && !BackupData.CustomerKey) {
-
-                        // reload Crypt options on AgentTicketForward
-                        if (Core.Config.Get('Action') === 'AgentTicketForward' && $('#CryptKeyID').length) {
-                            Core.AJAX.FormUpdate($Element.closest('form'), 'AJAXUpdate', '', ['CryptKeyID']);
+                        if (Core.Config.Get('Action') === 'AgentTicketProcess'){
+                            // update services (trigger ServiceID change event)
+                            Core.AJAX.FormUpdate($('#CustomerID').closest('form'), 'AJAXUpdate', 'ServiceID', Core.Config.Get('ProcessManagement.UpdatableFields') );
                         }
                     }
                 });
@@ -296,25 +321,6 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             else {
                 // initializes the customer fields
                 TargetNS.InitCustomerField();
-            }
-
-            // Special treatment for the new ticket masks only
-            if (Core.Config.Get('Action') === 'AgentTicketPhone' || Core.Config.Get('Action') === 'AgentTicketPhoneSecond' || Core.Config.Get('Action') === 'AgentTicketEmail') {
-
-                // If the field was already prefilled, but a customer user could not be found on the server side,
-                //  the auto complete should be fired to give the user a selection of possible matches to choose from.
-//                if (ActiveAutoComplete && $Element.val() && $Element.val().length && !$('#SelectedCustomerUser').val().length) {
-//                    $($Element).focus().autocomplete('search', $Element.val());
-//                }
-            }
-
-            if (!ActiveAutoComplete) {
-                $Element.after('<button id="' + $Element.attr('id') + 'Search" type="button">' + Core.Config.Get('Autocomplete.SearchButtonText') + '</button>');
-                $('#' + $Element.attr('id') + 'Search').click(function () {
-                    $Element.autocomplete("option", "minLength", 0);
-                    $Element.autocomplete("search");
-                    $Element.autocomplete("option", "minLength", 500);
-                });
             }
         }
 
@@ -326,6 +332,9 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         CheckPhoneCustomerCountLimit();
     };
 
+    function htmlDecode(Text){
+        return Text.replace(/&amp;/g, '&');
+    }
 
     /**
      * @function
@@ -336,6 +345,10 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
      *      This function add a new ticket customer
      */
     TargetNS.AddTicketCustomer = function (Field, CustomerValue, CustomerKey, SetAsTicketCustomer) {
+
+        if ( typeof CustomerKey !== 'undefined') {
+            CustomerKey = htmlDecode(CustomerKey);
+        }
 
         if (CustomerValue === '') {
             return false;
@@ -360,7 +373,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         }
 
         // get number of how much customer ticket are present
-        TicketCustomerIDs = $('.CustomerContainer input:radio').length;
+        TicketCustomerIDs = $('.CustomerContainer input[type="radio"]').length;
 
         // increment customer counter
         CustomerTicketCounter ++;
@@ -372,7 +385,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         $Clone.removeClass('Hidden CustomerTicketTemplate' + Field);
 
         // copy values and change ids and names
-        $Clone.find(':input').each(function(){
+        $Clone.find(':input, a').each(function(){
             var ID = $(this).attr('id');
             $(this).attr('id', ID + Suffix);
             $(this).val(CustomerValue);
@@ -384,7 +397,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             if( $(this).hasClass('CustomerTicketRadio') ) {
 
                 if (TicketCustomerIDs === 0) {
-                    $(this).attr('checked', 'checked');
+                    $(this).prop('checked', true);
                 }
 
                 // set counter as value
@@ -393,7 +406,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                 // bind change function to radio button to select customer
                 $(this).bind('change', function () {
                     // remove row
-                    if ( $(this).attr('checked') ){
+                    if ( $(this).prop('checked') ){
 
                         TargetNS.ReloadCustomerInfo(CustomerKey);
                     }
@@ -407,7 +420,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             }
 
             // add event handler to remove button
-            if( $(this).hasClass('Remove') ) {
+            if( $(this).hasClass('RemoveButton') ) {
 
                 // bind click function to remove button
                 $(this).bind('click', function () {
@@ -429,10 +442,10 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         $('#CustomerTicketCounter' + Field).val(CustomerTicketCounter);
         if ( ( CustomerKey !== '' && TicketCustomerIDs === 0 && ( Field === 'ToCustomer' || Field === 'FromCustomer' ) ) || SetAsTicketCustomer ) {
             if (SetAsTicketCustomer) {
-                $('#CustomerSelected_' + CustomerTicketCounter).attr('checked', 'checked').trigger('change');
+                $('#CustomerSelected_' + CustomerTicketCounter).prop('checked', true).trigger('change');
             }
             else {
-                $('.CustomerContainer input:radio:first').attr('checked', 'checked').trigger('change');
+                $('.CustomerContainer input[type="radio"]:first').prop('checked', true).trigger('change');
             }
         }
 
@@ -441,10 +454,25 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
         CheckPhoneCustomerCountLimit();
 
-        // reload Crypt options on AgentTicketEMail and AgentTicketCompose
-        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose') && $('#CryptKeyID').length) {
+        // reload Crypt options on AgentTicketEMail, AgentTicketCompose and AgentTicketForward
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length) {
+        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length) {
+//---
             Core.AJAX.FormUpdate( $('#' + Field).closest('form'), 'AJAXUpdate', '', ['CryptKeyID']);
         }
+
+        // now that we know that at least one customer has been added,
+        // we can remove eventual errors from the customer field
+        $('#FromCustomer, #ToCustomer')
+            .removeClass('Error ServerError')
+            .closest('.Field')
+            .prev('label')
+            .removeClass('LabelError');
+        Core.Form.ErrorTooltips.HideTooltip();
+
         return false;
     };
 
@@ -458,25 +486,40 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         var TicketCustomerIDs = 0,
         TicketCustomerIDsCounter = 0,
         ObjectoToCheck,
+        $Field = Object.closest('.Field'),
         $Form;
 
-        if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose') {
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//        if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') {
+        if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' ) {
+//---
             $Form = Object.closest('form');
         }
         Object.parent().remove();
-        TicketCustomerIDs = $('.CustomerContainer input:radio').length;
+        TicketCustomerIDs = $('.CustomerContainer input[type="radio"]').length;
         if (TicketCustomerIDs === 0) {
             TargetNS.ResetCustomerInfo();
         }
 
-        // reload Crypt options on AgentTicketEMail and AgentTicketCompose
-        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose') && $('#CryptKeyID').length) {
+        // reload Crypt options on AgentTicketEMail, AgentTicketCompose and AgentTicketForward
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length) {
+        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length ) {
+//---
             Core.AJAX.FormUpdate($Form, 'AJAXUpdate', '', ['CryptKeyID']);
         }
 
-        if( !$('.CustomerContainer input:radio').is(':checked') ){
+        if( !$('.CustomerContainer input[type="radio"]').is(':checked') ){
             //set the first one as checked
-            $('.CustomerContainer input:radio:first').attr('checked', 'checked').trigger('change');
+            $('.CustomerContainer input[type="radio"]:first').prop('checked', true).trigger('change');
+        }
+
+        if ($Field.find('.CustomerTicketText:visible').length === 0) {
+            $Field.addClass('Hidden');
         }
 
         CheckPhoneCustomerCountLimit();
@@ -529,14 +572,50 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             var ObjectId = $(this).attr('id');
 
             $('#' + ObjectId).bind('change', function () {
+
                 if ( !$('#' + ObjectId).val() || $('#' + ObjectId).val() === '') {
                     return false;
                 }
+
+                // if autocompletion is disabled and only avaible via the click
+                // of a button next to the input field, we cannot handle this
+                // change event the normal way.
+                if (!Core.UI.Autocomplete.GetConfig('ActiveAutoComplete')) {
+                    // we wait some time after this event to check, if the search button
+                    // for this field was pressed. If so, no action is needed
+                    // If the change event was fired without clicking the search button,
+                    // probably the user clicked out of the field.
+                    // This should also add the customer (the enetered value) to the list
+
+                    if (typeof CustomerFieldChangeRunCount[ObjectId] === 'undefined') {
+                        CustomerFieldChangeRunCount[ObjectId] = 1;
+                    }
+                    else {
+                        CustomerFieldChangeRunCount[ObjectId]++;
+                    }
+
+                    if (Core.UI.Autocomplete.SearchButtonClicked[ObjectId]) {
+                        delete CustomerFieldChangeRunCount[ObjectId];
+                        delete Core.UI.Autocomplete.SearchButtonClicked[ObjectId];
+                        return false;
+                    }
+                    else {
+                        if (CustomerFieldChangeRunCount[ObjectId] === 1) {
+                            window.setTimeout(function () {
+                                $('#' + ObjectId).trigger('change');
+                            }, 200);
+                            return false;
+                        }
+                        delete CustomerFieldChangeRunCount[ObjectId];
+                    }
+                }
+
+
                 // If the autocomplete popup window is visible, delay this change event.
                 // It might be caused by clicking with the mouse into the autocomplete list.
                 // Wait until it is closed to be sure that we don't add a customer twice.
-                var ObjectIndex = $('.CustomerAutoComplete').index(this);
-                if ( $('.ui-autocomplete').eq(ObjectIndex).css('display') === 'block' ) {
+
+                if ( $(this).autocomplete("widget").is(':visible') ) {
                     window.setTimeout(function(){
                         $('#' + ObjectId).trigger('change');
                     }, 200);
@@ -565,9 +644,10 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
     TargetNS.ShowDuplicatedDialog = function(Field){
         Core.UI.Dialog.ShowAlert(
             Core.Config.Get('Duplicated.TitleText'),
-            Core.Config.Get('Duplicated.ContentText'),
+            Core.Config.Get('Duplicated.ContentText') + ' ' + Core.Config.Get('Duplicated.RemoveText'),
             function () {
                 Core.UI.Dialog.CloseDialog($('.Alert'));
+                $('#' + Field).val('');
                 $('#' + Field).focus();
                 return false;
             }
