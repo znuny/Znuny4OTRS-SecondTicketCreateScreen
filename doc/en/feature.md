@@ -10,7 +10,7 @@ After installing the package you'll find two new menu items under "Tickets" zwei
 * New phone ticket 2
 * New email ticket 2
 
-Lile for each other view there are new settings available.
+Like for each other view there are new settings available.
 You find them in the Sysconfig under the following sections:
 
 * Frontend::Agent::Ticket::ViewPhoneNewSecond
