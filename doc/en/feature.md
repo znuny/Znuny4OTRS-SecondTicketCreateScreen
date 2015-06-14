@@ -1,17 +1,17 @@
 # Znuny4OTRS-SecondTicketCreateScreen
 
-Dieses Paket ermöglicht die Doppelung folgender Ansichten:
+With this package you have a second instance for these views:
 
 * AgentTicketPhone
 * AgentTicketEmail
 
-Nach Installation finden Sie im Menü "Tickets" zwei neue Unterpunkte:
+After installing the package you'll find two new menu items under "Tickets" zwei neue Unterpunkte:
 
 * New phone ticket 2
 * New email ticket 2
 
-Für die identischen Ansichten können Sie unterschiedliche Einstellungen pflegen.
-Diese finden Sie in der Sysconfig in den Untergruppen:
+Lile for each other view there are new settings available.
+You find them in the Sysconfig under the following sections:
 
 * Frontend::Agent::Ticket::ViewPhoneNewSecond
 * Frontend::Agent::Ticket::ViewEmailSecondNew
