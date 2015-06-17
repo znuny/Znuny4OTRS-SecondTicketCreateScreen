@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.1">
     <Name>Znuny4OTRS-SecondTicketCreateScreen</Name>
-    <Version>1.1.1</Version>
+    <Version>1.2.1</Version>
+    <ChangeLog Version="1.2.1" Date="2015-06-17 09:32:43 UTC">Initial release 4.0.x.</ChangeLog>
     <ChangeLog Version="1.1.1" Date="2014-07-04 10:27:48 +0200">Fixed bug: Eror while installing package from remote source because of missing template directive.</ChangeLog>
     <ChangeLog Version="1.1.0" Date="2014-01-14 14:15:51 +0100">Added OTRS 3.3 support.</ChangeLog>
     <Framework>4.0.x</Framework>
