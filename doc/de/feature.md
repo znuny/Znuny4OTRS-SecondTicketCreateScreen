@@ -1,5 +1,3 @@
-![Znuny logo](http://znuny.com/assets/logo_small.png)
-
 Znuny4OTRS-SecondTicketCreateScreen
 ===================================
 Provides a second phone and email ticket create screen with their own SysConfig settings.
