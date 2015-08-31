@@ -1,8 +1,7 @@
 // --
 // Core.Agent.CustomerSearch.js - provides the special module functions for the customer search
-// Copyright (C) 2001-2012 OTRS AG, http://otrs.org/
-// --
-// $Id: Core.Agent.CustomerSearch.js,v 1.33.2.7 2012/06/14 12:55:36 mg Exp $
+// Copyright (C) 2001-2015 OTRS AG, http://otrs.com/
+// Copyright (C) 2012-2015 Znuny GmbH, http://znuny.com/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -177,8 +176,13 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             GetCustomerTickets($('#CustomerAutoComplete').val(), $('#CustomerID').val());
         }
 
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//
         // get customer tickets for AgentTicketPhone and AgentTicketEmail
         if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone' || Core.Config.Get('Action') === 'AgentTicketPhoneSecond' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' ) && $('#SelectedCustomerUser').val() !== '') {
+//---
             GetCustomerTickets($('#SelectedCustomerUser').val());
         }
 
@@ -231,12 +235,20 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                     }
 
                     $Element.val(CustomerValue);
-
-                    if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' || Core.Config.Get('Action') === 'AgentTicketCompose' ) {
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//                  if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward') {
+                    if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward') {
+//---
                         $Element.val('');
                     }
-
-                    if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmailSecond' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose') {
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//                  if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward') {
+                    if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmailSecond' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward') {
+//---
                         // set hidden field SelectedCustomerUser
                         $('#SelectedCustomerUser').val(CustomerKey);
 
@@ -265,8 +277,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                     return false;
                 }
             });
-
-            if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose') {
+//---
+// Znuny4OTRS-SecondTicketCreateScreen
+//---
+//          if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward') {
+            if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketPhoneSecond' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward') {
+//---
                 $Element.blur(function () {
                     var FieldValue = $(this).val();
                     if (FieldValue !== BackupData.CustomerEmail && FieldValue !== BackupData.CustomerKey) {

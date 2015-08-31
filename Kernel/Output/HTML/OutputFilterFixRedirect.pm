@@ -1,6 +1,10 @@
 # --
 # Kernel/Output/HTML/OutputFilterFixRedirect.pm - fix redirect
-# Copyright (C) 2014 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2015 Znuny GmbH, http://znuny.com/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 package Kernel::Output::HTML::OutputFilterFixRedirect;
@@ -28,7 +32,10 @@ sub Run {
 
     # check needed stuff
     if ( !defined $Param{Data} ) {
-        $Self->{LogObject}->Log( Priority => 'error', Message => 'Need Data!' );
+        $Self->{LogObject}->Log(
+            Priority => 'error',
+            Message  => 'Need Data!'
+        );
         $Self->{LayoutObject}->FatalDie();
     }
 
@@ -43,7 +50,9 @@ sub Run {
     return $Param{Data} if $Self->{LayoutObject}->{Action} =~ /CTI/;
 
     # return if redirect is not to create screen again
-    return $Param{Data} if $Self->{LayoutObject}->{UserCreateNextMask} && $Self->{LayoutObject}->{UserCreateNextMask} =~ /^(AgentTicketZoom|AgentZoom)/;
+    return $Param{Data}
+        if $Self->{LayoutObject}->{UserCreateNextMask}
+        && $Self->{LayoutObject}->{UserCreateNextMask} =~ /^(AgentTicketZoom|AgentZoom)/;
 
     # rewrite redirect
     ${ $Param{Data} } =~ s/Action=(AgentTicket(Phone|Email))/Action=$Self->{LayoutObject}->{Action}/;
