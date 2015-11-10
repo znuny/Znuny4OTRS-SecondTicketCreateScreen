@@ -288,7 +288,7 @@
     </ConfigItem>
     <ConfigItem Name="Frontend::Output::FilterElementPost###AgentTicketCreateSecond" Required="0" Valid="1">
         <Description Translatable="1">Defines the filter to fix redirects.</Description>
-        <Group>FraZnuny4OTRS-SecondTicketCreateScreen</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Core::Web</SubGroup>
         <Setting>
             <Hash>
