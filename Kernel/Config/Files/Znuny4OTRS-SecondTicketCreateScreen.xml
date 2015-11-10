@@ -2,7 +2,7 @@
 <otrs_config version="1.0" init="Application">
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###Priority" Required="1" Valid="1">
         <Description Translatable="1">Sets the default priority for new phone tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <ValidateModule>Kernel::System::SysConfig::PriorityValidate</ValidateModule>
         <Setting>
@@ -11,7 +11,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###ArticleType" Required="1" Valid="1">
         <Description Translatable="1">Sets the default article type for new phone tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <String Regex="">phone</String>
@@ -19,7 +19,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###SenderType" Required="1" Valid="1">
         <Description Translatable="1">Sets the default sender type for new phone ticket in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <String Regex="">customer</String>
@@ -27,7 +27,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond::AllowMultipleFrom" Required="1" Valid="1">
         <Description Translatable="1">Controls if more than one from entry can be set in the new phone ticket in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <Option SelectedID="1">
@@ -38,7 +38,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###Subject" Required="1" Valid="1">
         <Description Translatable="1">Sets the default subject for new phone tickets (e.g. 'Phone call') in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <String Regex=""></String>
@@ -46,7 +46,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###Body" Required="1" Valid="1">
         <Description Translatable="1">Sets the default note text for new telephone tickets. E.g 'New ticket via call' in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <TextArea></TextArea>
@@ -54,7 +54,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###StateDefault" Required="1" Valid="1">
         <Description Translatable="1">Sets the default next state for new phone tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <ValidateModule>Kernel::System::SysConfig::StateValidate</ValidateModule>
         <Setting>
@@ -63,7 +63,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###StateType" Required="1" Valid="1">
         <Description Translatable="1">Determines the next possible ticket states, after the creation of a new phone ticket in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <Array>
@@ -76,7 +76,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###HistoryType" Required="1" Valid="1">
         <Description Translatable="1">Defines the history type for the phone ticket screen action, which gets used for ticket history in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <String Regex="">PhoneCallCustomer</String>
@@ -84,16 +84,15 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###HistoryComment" Required="1" Valid="1">
         <Description Translatable="1">Defines the history comment for the phone ticket screen action, which gets used for ticket history in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <String Regex=""></String>
         </Setting>
     </ConfigItem>
-
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###SplitLinkType" Required="0" Valid="1">
         <Description Translatable="1">Sets the default link type of splitted tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <Hash>
@@ -102,26 +101,25 @@
             </Hash>
         </Setting>
     </ConfigItem>
-
     <ConfigItem Name="Frontend::ToolBarModule###4-Ticket::AgentTicketPhoneSecond" Required="0" Valid="0">
         <Description Translatable="1">Toolbar Item for a shortcut.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::ToolBarModule</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::ToolBarLink</Item>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
                 <Item Key="Name">New phone ticket 2</Item>
                 <Item Key="Link">Action=AgentTicketPhoneSecond</Item>
                 <Item Key="Action">AgentTicketPhoneSecond</Item>
                 <Item Key="AccessKey">l</Item>
-                <Item Key="CssClass">PhoneTicket</Item>
+                <Item Key="Icon">fa fa-phone</Item>
                 <Item Key="Priority">1020012</Item>
             </Hash>
         </Setting>
     </ConfigItem>
     <ConfigItem Name="Frontend::Module###AgentTicketPhoneSecond" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::ModuleRegistration</SubGroup>
         <Setting>
             <FrontendModuleReg>
@@ -148,17 +146,16 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###DynamicField" Required="0" Valid="1">
         <Description Translatable="1">Dynamic fields shown in the ticket phone screen of the agent interface. Possible settings: 0 = Disabled, 1 = Enabled, 2 = Enabled and required.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
         <Setting>
             <Hash>
             </Hash>
         </Setting>
     </ConfigItem>
-
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###Priority" Required="1" Valid="1">
         <Description Translatable="1">Sets the default priority for new email tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <ValidateModule>Kernel::System::SysConfig::PriorityValidate</ValidateModule>
         <Setting>
@@ -167,7 +164,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###ArticleType" Required="1" Valid="1">
         <Description Translatable="1">Sets the default article type for new email tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <String Regex="">email-external</String>
@@ -175,7 +172,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###SenderType" Required="1" Valid="1">
         <Description Translatable="1">Sets the default sender type for new email tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <String Regex="">agent</String>
@@ -183,7 +180,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###Subject" Required="1" Valid="1">
         <Description Translatable="1">Sets the default subject for new email tickets (e.g. 'email Outbound') in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <String Regex=""></String>
@@ -191,7 +188,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###Body" Required="1" Valid="1">
         <Description Translatable="1">Sets the default text for new email tickets in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <TextArea></TextArea>
@@ -199,7 +196,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###StateDefault" Required="1" Valid="1">
         <Description Translatable="1">Sets the default next ticket state, after the creation of an email ticket in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <ValidateModule>Kernel::System::SysConfig::StateValidate</ValidateModule>
         <Setting>
@@ -208,7 +205,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###StateType" Required="1" Valid="1">
         <Description Translatable="1">Determines the next possible ticket states, after the creation of a new email ticket in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <Array>
@@ -221,7 +218,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###HistoryType" Required="1" Valid="1">
         <Description Translatable="1">Defines the history type for the email ticket screen action, which gets used for ticket history in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <String Regex="">EmailAgent</String>
@@ -229,7 +226,7 @@
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###HistoryComment" Required="1" Valid="1">
         <Description Translatable="1">Defines the history comment for the email ticket screen action, which gets used for ticket history in the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <String Regex=""></String>
@@ -238,16 +235,16 @@
 
     <ConfigItem Name="Frontend::ToolBarModule###5-Ticket::AgentTicketEmailSecond" Required="0" Valid="0">
         <Description Translatable="1">Toolbar Item for a shortcut.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::ToolBarModule</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::ToolBarLink</Item>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
                 <Item Key="Name">New email ticket 2</Item>
                 <Item Key="Link">Action=AgentTicketEmailSecond</Item>
                 <Item Key="Action">AgentTicketEmailSecond</Item>
                 <Item Key="AccessKey">l</Item>
-                <Item Key="CssClass">EmailTicket</Item>
+                <Item Key="Icon">fa fa-envelope</Item>
                 <Item Key="Priority">1020020</Item>
             </Hash>
         </Setting>
@@ -255,7 +252,7 @@
 
     <ConfigItem Name="Frontend::Module###AgentTicketEmailSecond" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::ModuleRegistration</SubGroup>
         <Setting>
             <FrontendModuleReg>
@@ -280,20 +277,18 @@
             </FrontendModuleReg>
         </Setting>
     </ConfigItem>
-
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###DynamicField" Required="0" Valid="1">
         <Description Translatable="1">Dynamic fields shown in the ticket email screen of the agent interface. Possible settings: 0 = Disabled, 1 = Enabled, 2 = Enabled and required.</Description>
-        <Group>Ticket</Group>
+        <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
         <Setting>
             <Hash>
             </Hash>
         </Setting>
     </ConfigItem>
-
     <ConfigItem Name="Frontend::Output::FilterElementPost###AgentTicketCreateSecond" Required="0" Valid="1">
         <Description Translatable="1">Defines the filter to fix redirects.</Description>
-        <Group>Framework</Group>
+        <Group>FraZnuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Core::Web</SubGroup>
         <Setting>
             <Hash>
