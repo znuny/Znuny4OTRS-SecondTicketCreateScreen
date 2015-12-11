@@ -1,5 +1,4 @@
 # --
-# Kernel/Output/HTML/OutputFilterFixRedirect.pm - fix redirect
 # Copyright (C) 2012-2015 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
@@ -7,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::Output::HTML::OutputFilterFixRedirect;
+package Kernel::Output::HTML::FilterElementPost::FixRedirect;
 
 use strict;
 use warnings;

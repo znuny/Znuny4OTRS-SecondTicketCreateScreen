@@ -15,7 +15,7 @@
         <File Location="Kernel/Config/Files/Znuny4OTRS-SecondTicketCreateScreen.xml" Permission="644"/>
         <File Location="Kernel/Modules/AgentTicketPhoneSecond.pm" Permission="644"/>
         <File Location="Kernel/Modules/AgentTicketEmailSecond.pm" Permission="644"/>
-        <File Location="Kernel/Output/HTML/OutputFilterFixRedirect.pm" Permission="644"/>
+        <File Location="Kernel/Output/HTML/FilterElementPost/FixRedirect.pm" Permission="644"/>
         <File Location="var/httpd/htdocs/js/Core.Agent.CustomerSearch.js" Permission="644"/>
     </Filelist>
 </otrs_package>

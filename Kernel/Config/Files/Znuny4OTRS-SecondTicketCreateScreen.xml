@@ -292,7 +292,7 @@
         <SubGroup>Core::Web</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::OutputFilterFixRedirect</Item>
+                <Item Key="Module">Kernel::Output::HTML::FilterElementPost::FixRedirect</Item>
                 <Item Key="Templates">
                     <Hash>
                         <Item Key="AgentTicketPhoneSecond">1</Item>
