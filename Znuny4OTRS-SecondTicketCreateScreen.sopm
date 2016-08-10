@@ -13,10 +13,10 @@
     <Framework>3.3.x</Framework>
     <PackageRequired Version="1.0.0">Znuny4OTRS-Repo</PackageRequired>
     <Filelist>
-        <File Location="Kernel/Config/Files/Znuny4OTRS-SecondTicketCreateScreen.xml" Permission="644"/>
-        <File Location="Kernel/Modules/AgentTicketPhoneSecond.pm" Permission="644"/>
-        <File Location="Kernel/Modules/AgentTicketEmailSecond.pm" Permission="644"/>
-        <File Location="Kernel/Output/HTML/OutputFilterFixRedirect.pm" Permission="644"/>
-        <File Location="var/httpd/htdocs/js/Core.Agent.CustomerSearch.js" Permission="644"/>
+        <File Permission="644" Location="Kernel/Config/Files/Znuny4OTRS-SecondTicketCreateScreen.xml"/>
+        <File Permission="644" Location="Kernel/Modules/AgentTicketEmailSecond.pm"/>
+        <File Permission="644" Location="Kernel/Modules/AgentTicketPhoneSecond.pm"/>
+        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterFixRedirect.pm"/>
+        <File Permission="644" Location="var/httpd/htdocs/js/Core.Agent.CustomerSearch.js"/>
     </Filelist>
 </otrs_package>
