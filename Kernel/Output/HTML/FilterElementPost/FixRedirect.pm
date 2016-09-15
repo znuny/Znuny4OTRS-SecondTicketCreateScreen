@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2015 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -21,8 +21,8 @@ sub new {
     bless( $Self, $Type );
 
     # check needed objects
-    for (qw(DBObject ConfigObject LogObject TimeObject MainObject LayoutObject)) {
-        $Self->{$_} = $Param{$_} || die "Got no $_!";
+    for my $Needed (qw(DBObject ConfigObject LogObject TimeObject MainObject LayoutObject)) {
+        $Self->{$Needed} = $Param{$Needed} || die "Got no $Needed!";
     }
 
     return $Self;
