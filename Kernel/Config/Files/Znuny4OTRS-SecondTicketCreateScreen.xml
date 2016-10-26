@@ -244,7 +244,7 @@
                 <Item Key="Action">AgentTicketEmailSecond</Item>
                 <Item Key="AccessKey">l</Item>
                 <Item Key="CssClass">EmailTicket</Item>
-                <Item Key="Priority">1020020</Item>
+                <Item Key="Priority">1020021</Item>
             </Hash>
         </Setting>
     </ConfigItem>
