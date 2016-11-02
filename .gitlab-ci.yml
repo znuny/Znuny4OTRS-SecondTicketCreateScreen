@@ -1,0 +1,9 @@
+image: otrs4ci
+
+stages:
+  - deploy
+
+job_deploy_otrs_Znuny4OTRSSecondTicketCreateScreen:
+  stage: deploy
+  script:
+    - sh /sync_repo.sh git@github.com:znuny/Znuny4OTRS-SecondTicketCreateScreen.git
