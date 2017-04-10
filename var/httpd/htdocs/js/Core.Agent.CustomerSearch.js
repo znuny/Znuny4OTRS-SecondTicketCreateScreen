@@ -1,7 +1,6 @@
 // --
-// Core.Agent.CustomerSearch.js - provides the special module functions for the customer search
-// Copyright (C) 2001-2015 OTRS AG, http://otrs.com/
-// Copyright (C) 2012-2015 Znuny GmbH, http://znuny.com/
+// Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
+// Copyright (C) 2012-2017 Znuny GmbH, http://znuny.com/
 // --
 // $origin: https://github.com/OTRS/otrs/blob/63e18b949eb6525e61eb62cfad6af02cd4713501/var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 // --
@@ -9,6 +8,8 @@
 // the enclosed file COPYING for license information (AGPL). If you
 // did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 // --
+// nofilter(TidyAll::Plugin::OTRS::JavaScript::ESLint)
+// nofilter(TidyAll::Plugin::OTRS::JavaScript::UnloadEvent)
 
 "use strict";
 
@@ -54,12 +55,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             $('#CustomerInfo .Content').html(Response.CustomerTableHTMLString);
 
             // only execute this part, if in AgentTicketEmail or AgentTicketPhone
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //            if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') {
             if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone' || Core.Config.Get('Action') === 'AgentTicketPhoneSecond' || Core.Config.Get('Action') === 'AgentTicketEmailSecond' ) {
-//---
+// ---
                 // reset service
                 $('#ServiceID').attr('selectedIndex', 0);
                 // update services (trigger ServiceID change event)
@@ -158,12 +159,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
     function CheckPhoneCustomerCountLimit() {
 
         // Only operate in AgentTicketPhone
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //        if ( Core.Config.Get('Action') !== 'AgentTicketPhone' ) {
         if ( Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1 ) {
-//---
+// ---
             return;
         }
 
@@ -194,12 +195,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         }
 
         // get customer tickets for AgentTicketPhone and AgentTicketEmail
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') && $('#SelectedCustomerUser').val() !== '') {
         if ( ( Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1 ) && $('#SelectedCustomerUser').val() !== '' ) {
-//---
+// ---
             GetCustomerTickets($('#SelectedCustomerUser').val());
         }
 
@@ -254,21 +255,21 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
                 $Element.val(CustomerValue);
 
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //                if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') {
                 if (Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') {
-//---
+// ---
                     $Element.val('');
                 }
 
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //                if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound') {
                 if (Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1 && Core.Config.Get('Action').search(/^AgentTicketEmail.*/) === -1 && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound') {
-//---
+// ---
                     // set hidden field SelectedCustomerUser
                     $('#SelectedCustomerUser').val(CustomerKey);
 
@@ -294,12 +295,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                 }
             }, 'CustomerSearch');
 
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //            if (Core.Config.Get('Action') !== 'AgentTicketPhone' && Core.Config.Get('Action') !== 'AgentTicketEmail' && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound') {
             if (Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1 && Core.Config.Get('Action').search(/^AgentTicketEmail.*/) === -1 && Core.Config.Get('Action') !== 'AgentTicketCompose' && Core.Config.Get('Action') !== 'AgentTicketForward' && Core.Config.Get('Action') !== 'AgentTicketEmailOutbound') {
-//---
+// ---
                 $Element.blur(function () {
                     var FieldValue = $(this).val();
                     if (FieldValue !== BackupData.CustomerEmail && FieldValue !== BackupData.CustomerKey) {
@@ -456,12 +457,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         CheckPhoneCustomerCountLimit();
 
         // reload Crypt options on AgentTicketEMail, AgentTicketCompose and AgentTicketForward
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length) {
         if ((Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length) {
-//---
+// ---
             Core.AJAX.FormUpdate( $('#' + Field).closest('form'), 'AJAXUpdate', '', ['CryptKeyID']);
         }
 
@@ -490,12 +491,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         $Field = Object.closest('.Field'),
         $Form;
 
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //        if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') {
         if (Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') {
-//---
+// ---
             $Form = Object.closest('form');
         }
         Object.parent().remove();
@@ -505,12 +506,12 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         }
 
         // reload Crypt options on AgentTicketEMail, AgentTicketCompose and AgentTicketForward
-//---
+// ---
 // Znuny4OTRS-SecondTicketCreateScreen
-//---
+// ---
 //        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length) {
         if ((Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action') === 'AgentTicketCompose' || Core.Config.Get('Action') === 'AgentTicketForward' || Core.Config.Get('Action') === 'AgentTicketEmailOutbound') && $('#CryptKeyID').length) {
-//---
+// ---
             Core.AJAX.FormUpdate($Form, 'AJAXUpdate', '', ['CryptKeyID']);
         }
 
