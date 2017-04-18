@@ -199,7 +199,7 @@
             <String Regex="^\d+%?$">320</String>
         </Setting>
     </ConfigItem>
-    <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecondSecond###DynamicField" Required="0" Valid="1">
+    <ConfigItem Name="Ticket::Frontend::AgentTicketPhoneSecond###DynamicField" Required="0" Valid="1">
         <Description Translatable="1">Dynamic fields shown in the ticket phone screen of the agent interface. Possible settings: 0 = Disabled, 1 = Enabled, 2 = Enabled and required.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
         <SubGroup>Frontend::Agent::Ticket::ViewPhoneNewSecond</SubGroup>
