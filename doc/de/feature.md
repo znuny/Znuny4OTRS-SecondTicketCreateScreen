@@ -11,7 +11,7 @@ Nach Installation finden Sie im Menü "Tickets" zwei neue Unterpunkte:
 * New email ticket 2
 
 Für die identischen Ansichten können Sie unterschiedliche Einstellungen pflegen.
-Diese finden Sie in der Sysconfig in den Untergruppen:
+Diese finden Sie in der SysConfig in den Untergruppen:
 
 * Frontend::Agent::Ticket::ViewPhoneNewSecond
 * Frontend::Agent::Ticket::ViewEmailSecondNew
