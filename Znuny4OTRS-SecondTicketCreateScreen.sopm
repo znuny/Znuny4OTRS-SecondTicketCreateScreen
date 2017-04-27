@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.1">
     <Name>Znuny4OTRS-SecondTicketCreateScreen</Name>
-    <Version>4.0.1</Version>
+    <Version>4.0.2</Version>
+    <ChangeLog Version="4.0.2" Date="2017-04-27 23:45:28 +0200">Added ACLKeysLevel3Actions and DynamicFieldScreens registration.</ChangeLog>
     <ChangeLog Version="4.0.1" Date="2016-10-26 14:16:37 +0200">Fixed bug: Same priority doesn't show email ticket toolbar.</ChangeLog>
     <ChangeLog Version="1.2.2" Date="2015-09-29 13:07:52 UTC">Changed AgentTicketPhone... and AgentTicketEmail ... checks to regex to be more flexible in custom development.</ChangeLog>
     <ChangeLog Version="1.2.1" Date="2015-06-17 09:32:43 UTC">Initial release 4.0.x.</ChangeLog>
