@@ -27,7 +27,7 @@ Download the package and install it via admin interface -> package manager or us
 Via SysConfig just like for the normal phone and email tickets.
 
 * Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewPhoneNewSecond
-* Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewEmailSecondNew
+* Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewEmailNewSecond
 
 **Download**
 
