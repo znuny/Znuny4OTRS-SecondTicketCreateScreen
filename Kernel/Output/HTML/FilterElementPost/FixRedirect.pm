@@ -11,19 +11,15 @@ package Kernel::Output::HTML::FilterElementPost::FixRedirect;
 use strict;
 use warnings;
 
-our $ObjectManagerDisabled = 1;
+our @ObjectDependencies = (
+    'Kernel::Output::HTML::Layout',
+);
 
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
-
-    # check needed objects
-    for my $Needed (qw(DBObject ConfigObject LogObject TimeObject MainObject LayoutObject)) {
-        $Self->{$Needed} = $Param{$Needed} || die "Got no $Needed!";
-    }
 
     return $Self;
 }
@@ -31,7 +27,8 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # check needed stuff
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
     if ( !defined $Param{Data} ) {
         $Self->{LogObject}->Log(
             Priority => 'error',
@@ -41,24 +38,24 @@ sub Run {
     }
 
     # only work on redirects
-    return $Param{Data} if !$Param{TemplateFile};
-    return $Param{Data} if $Param{TemplateFile} !~ /^redirect/i;
+    return if !$Param{TemplateFile};
+    return if $Param{TemplateFile} !~ m{\Aredirect}i;
 
-    # return if it's not email or phone ticket
-    return $Param{Data} if $Self->{LayoutObject}->{Action} !~ /^AgentTicket(Phone|Email)/;
+    # return if it's not second email or phone ticket action
+    return if $LayoutObject->{Action} !~ m{\AAgentTicket(Phone|Email)Second\z};
 
-    # do not redirect CTI called redirect's
-    return $Param{Data} if $Self->{LayoutObject}->{Action} =~ /CTI/;
+    #     # ignore CTI redirects
+    #     return if $LayoutObject->{Action} =~ m{CTI};
 
     # return if redirect is not to create screen again
-    return $Param{Data}
-        if $Self->{LayoutObject}->{UserCreateNextMask}
-        && $Self->{LayoutObject}->{UserCreateNextMask} =~ /^(AgentTicketZoom|AgentZoom)/;
+    return
+        if defined $LayoutObject->{UserCreateNextMask}
+        && $LayoutObject->{UserCreateNextMask} =~ m{\AAgent(Ticket)?Zoom};
 
     # rewrite redirect
-    ${ $Param{Data} } =~ s/Action=(AgentTicket(Phone|Email))/Action=$Self->{LayoutObject}->{Action}/;
+    ${ $Param{Data} } =~ s{Action=(AgentTicket(Phone|Email))}{Action=$LayoutObject->{Action}};
 
-    return $Param{Data};
+    return;
 }
 
 1;
