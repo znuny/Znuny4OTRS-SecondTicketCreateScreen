@@ -2,7 +2,7 @@
 // Copyright (C) 2001-2017 OTRS AG, http://otrs.com/
 // Copyright (C) 2012-2017 Znuny GmbH, http://znuny.com/
 // --
-// $origin: https://github.com/OTRS/otrs/blob/63e18b949eb6525e61eb62cfad6af02cd4713501/var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
+// $origin: otrs - 63e18b949eb6525e61eb62cfad6af02cd4713501 - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
