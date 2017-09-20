@@ -13,6 +13,7 @@ use warnings;
 
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Log',
 );
 
 sub new {
@@ -27,14 +28,15 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     if ( !defined $Param{Data} ) {
-        $Self->{LogObject}->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need Data!'
         );
-        $Self->{LayoutObject}->FatalDie();
+        $LayoutObject->FatalDie();
     }
 
     # only work on redirects
