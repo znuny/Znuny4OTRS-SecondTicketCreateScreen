@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<otrs_config version="2.0" init="Application">
+    <Setting Name="Frontend::Output::FilterElementPost###AgentTicketCreateSecond" Required="0" Valid="1">
+        <Description Translatable="1">Defines the filter to fix redirects.</Description>
+        <Navigation>Frontend::Base::OutputFilter</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::FilterElementPost::FixRedirect</Item>
+                <Item Key="Templates">
+                    <Hash>
+                        <Item Key="Redirect">1</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <!-- AgentTicketPhoneSecond -->
+    <Setting Name="Frontend::ToolBarModule###4-Ticket::AgentTicketPhoneSecond" Required="0" Valid="0">
+        <Description Translatable="1">Toolbar Item for a shortcut.</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Name">New phone ticket 2</Item>
+                <Item Key="Link">Action=AgentTicketPhoneSecond</Item>
+                <Item Key="Action">AgentTicketPhoneSecond</Item>
+                <Item Key="AccessKey">l</Item>
+                <Item Key="Icon">fa fa-phone</Item>
+                <Item Key="Priority">1020012</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AgentTicketPhoneSecond" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Create new phone ticket</Item>
+                    <Item Key="Title">New phone ticket</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketPhoneSecond###002-Znuny4OTRS-SecondTicketCreateScreen" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
+                        <Item>Core.Agent.TicketAction.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentTicketPhoneSecond###1" Required="0" Valid="1">
+        <Description Translatable="1">Main menu for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Description" Translatable="1">Create new phone ticket (inbound)</Item>
+                <Item Key="Name" Translatable="1">New phone ticket 2</Item>
+                <Item Key="Link">Action=AgentTicketPhoneSecond</Item>
+                <Item Key="LinkOption"></Item>
+                <Item Key="NavBar">Ticket</Item>
+                <Item Key="Type"></Item>
+                <Item Key="Block"></Item>
+                <Item Key="AccessKey">n</Item>
+                <Item Key="Prio">201</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###Priority" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default priority for new phone tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Priority" ValueRegex="">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###SenderType" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default sender type for new phone ticket in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">customer</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond::AllowMultipleFrom" Required="1" Valid="1">
+        <Description Translatable="1">Controls if more than one from entry can be set in the new phone ticket in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###Subject" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default subject for new phone tickets (e.g. 'Phone call') in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###Body" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default note text for new telephone tickets. E.g 'New ticket via call' in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Textarea"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###StateDefault" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default next state for new phone tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="State" ValueRegex="">open</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###StateType" Required="1" Valid="1">
+        <Description Translatable="1">Determines the next possible ticket states, after the creation of a new phone ticket in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Array>
+                <Item>open</Item>
+                <Item>pending auto</Item>
+                <Item>pending reminder</Item>
+                <Item>closed</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###HistoryType" Required="1" Valid="1">
+        <Description Translatable="1">Defines the history type for the phone ticket screen action, which gets used for ticket history in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">PhoneCallCustomer</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###HistoryComment" Required="1" Valid="1">
+        <Description Translatable="1">Defines the history comment for the phone ticket screen action, which gets used for ticket history in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###SplitLinkType" Required="0" Valid="1">
+        <Description Translatable="1">Sets the default link type of splitted tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="LinkType">ParentChild</Item>
+                <Item Key="Direction">Target</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###ServiceMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Sets if service must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###SLAMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Sets if SLA must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###RichTextWidth" Required="0" Valid="1">
+        <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###RichTextHeight" Required="0" Valid="1">
+        <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the ticket phone screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewPhoneNewSecond</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketPhoneSecond###002-Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
+                        <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
+                        <Item>Core.Agent.TicketAction.js</Item>
+                        <Item>Core.Agent.TicketPhone.js</Item>
+                        <Item>Core.Agent.TicketSplit.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###IsVisibleForCustomer" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default article customer visibility for new phone tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneNew</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <!-- AgentTicketEmailSecond -->
+    <Setting Name="Frontend::ToolBarModule###5-Ticket::AgentTicketEmailSecond" Required="0" Valid="0">
+        <Description Translatable="1">Toolbar Item for a shortcut.</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::Link</Item>
+                <Item Key="Name">New email ticket 2</Item>
+                <Item Key="Link">Action=AgentTicketEmailSecond</Item>
+                <Item Key="Action">AgentTicketEmailSecond</Item>
+                <Item Key="AccessKey">l</Item>
+                <Item Key="Icon">fa fa-envelope</Item>
+                <Item Key="Priority">1020021</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AgentTicketEmailSecond" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Create new email ticket</Item>
+                    <Item Key="Title">New email ticket</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketEmailSecond###002-Znuny4OTRS-SecondTicketCreateScreen" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
+                        <Item>Core.Agent.TicketAction.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentTicketEmailSecond###1" Required="0" Valid="1">
+        <Description Translatable="1">Main menu for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Description" Translatable="1">Create new email ticket and send this out (outbound)</Item>
+                <Item Key="Name" Translatable="1">New email ticket 2</Item>
+                <Item Key="Link">Action=AgentTicketEmailSecond</Item>
+                <Item Key="LinkOption"></Item>
+                <Item Key="NavBar">Ticket</Item>
+                <Item Key="Type"></Item>
+                <Item Key="Block"></Item>
+                <Item Key="AccessKey">m</Item>
+                <Item Key="Prio">211</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###Priority" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default priority for new email tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="Priority" ValueRegex="">3 normal</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###SenderType" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default sender type for new email tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">agent</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmail::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CutomerID is editable in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###Subject" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default subject for new email tickets (e.g. 'email Outbound') in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###Body" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default text for new email tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Textarea"></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###StateDefault" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default next ticket state, after the creation of an email ticket in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Entity" ValueEntityType="State" ValueRegex="">open</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###StateType" Required="1" Valid="1">
+        <Description Translatable="1">Determines the next possible ticket states, after the creation of a new email ticket in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Array>
+                <Item>open</Item>
+                <Item>pending auto</Item>
+                <Item>pending reminder</Item>
+                <Item>closed</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###HistoryType" Required="1" Valid="1">
+        <Description Translatable="1">Defines the history type for the email ticket screen action, which gets used for ticket history in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">EmailAgent</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###HistoryComment" Required="1" Valid="1">
+        <Description Translatable="1">Defines the history comment for the email ticket screen action, which gets used for ticket history in the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###ServiceMandatory" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Sets if service must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###SLAMandatory" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Sets if SLA must be selected by the agent.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###DynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the ticket email screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                    <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">620</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Agent::Ticket::ViewEmailNewSecond</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###SplitLinkType" Required="0" Valid="1">
+        <Description Translatable="1">Sets the default link type of split tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="LinkType">ParentChild</Item>
+                <Item Key="Direction">Target</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketEmailSecond###002-Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.CustomerSearch.js</Item>
+                        <Item>Core.Agent.CustomerSearchAutoComplete.js</Item>
+                        <Item>Core.Agent.TicketAction.js</Item>
+                        <Item>Core.Agent.TicketEmail.js</Item>
+                        <Item>Core.Agent.TicketSplit.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###IsVisibleForCustomer" Required="1" Valid="1">
+        <Description Translatable="1">Sets the default article customer visibility for new email tickets in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ACLKeysLevel3::Actions###237-SecondTicketCreateScreen" Required="0" Valid="1">
+        <Description Translatable="1">Defines which items are available for 'Action' in third level of the ACL structure.</Description>
+        <Navigation>Core::Ticket::ACL</Navigation>
+        <Value>
+            <Array>
+                <Item>AgentTicketPhoneSecond</Item>
+                <Item>AgentTicketEmailSecond</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <!-- Znuny4OTRSAdvancedDynamicFields DynamicFieldScreens registration -->
+    <Setting Name="DynamicFieldScreens###Znuny4OTRS-SecondCreateTicket" Required="1" Valid="1">
+        <Description Translatable="1">This configuration defines all possible screens to enable or disable dynamic fields.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Ticket::Frontend::AgentTicketPhoneSecond###DynamicField">AgentTicketPhoneSecond</Item>
+                <Item Key="Ticket::Frontend::AgentTicketEmailSecond###DynamicField">AgentTicketEmailSecond</Item>
+            </Hash>
+        </Value>
+    </Setting>
+</otrs_config>

@@ -11,6 +11,6 @@ package Kernel::Modules::AgentTicketEmailSecond;
 use strict;
 use warnings;
 
-use base qw( Kernel::Modules::AgentTicketEmail );
+use parent qw( Kernel::Modules::AgentTicketEmail );
 
 1;
