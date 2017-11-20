@@ -19,7 +19,7 @@
     <Description Lang="en">A second ticket create screen (phone and email ticket) to configure with own config settings.</Description>
     <Description Lang="de">Eine zusätzliche Ticket Erstellmaske (Telefon- und Email-Ticket) welche unabhängig konfiguriert werden kann.</Description>
     <Filelist>
-        <File Permission="660" Location="Kernel/Config/Files/XML/Znuny4OTRS-SecondTicketCreateScreen.xml"/>
+        <File Permission="660" Location="Kernel/Config/Files/XML/Znuny4OTRSSecondTicketCreateScreen.xml"/>
         <File Permission="660" Location="Kernel/Modules/AgentTicketEmailSecond.pm"/>
         <File Permission="660" Location="Kernel/Modules/AgentTicketPhoneSecond.pm"/>
         <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/FixRedirect.pm"/>
