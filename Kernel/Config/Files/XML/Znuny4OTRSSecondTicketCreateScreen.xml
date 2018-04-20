@@ -69,25 +69,33 @@
         <Description Translatable="1">Main menu for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
         <Value>
-            <Hash>
-                <Item Key="Group">
-                    <Array>
-                    </Array>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Create new phone ticket (inbound)</Item>
+                        <Item Key="Name" Translatable="1">New phone ticket 2</Item>
+                        <Item Key="Link">Action=AgentTicketPhoneSecond</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Ticket</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey">n</Item>
+                        <Item Key="Prio">201</Item>
+                    </Hash>
                 </Item>
-                <Item Key="GroupRo">
-                    <Array>
-                    </Array>
-                </Item>
-                <Item Key="Description" Translatable="1">Create new phone ticket (inbound)</Item>
-                <Item Key="Name" Translatable="1">New phone ticket 2</Item>
-                <Item Key="Link">Action=AgentTicketPhoneSecond</Item>
-                <Item Key="LinkOption"></Item>
-                <Item Key="NavBar">Ticket</Item>
-                <Item Key="Type"></Item>
-                <Item Key="Block"></Item>
-                <Item Key="AccessKey">n</Item>
-                <Item Key="Prio">201</Item>
-            </Hash>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###Priority" Required="1" Valid="1">
@@ -288,25 +296,33 @@
         <Description Translatable="1">Main menu for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
         <Value>
-            <Hash>
-                <Item Key="Group">
-                    <Array>
-                    </Array>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Create new email ticket and send this out (outbound)</Item>
+                        <Item Key="Name" Translatable="1">New email ticket 2</Item>
+                        <Item Key="Link">Action=AgentTicketEmailSecond</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Ticket</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey">m</Item>
+                        <Item Key="Prio">211</Item>
+                    </Hash>
                 </Item>
-                <Item Key="GroupRo">
-                    <Array>
-                    </Array>
-                </Item>
-                <Item Key="Description" Translatable="1">Create new email ticket and send this out (outbound)</Item>
-                <Item Key="Name" Translatable="1">New email ticket 2</Item>
-                <Item Key="Link">Action=AgentTicketEmailSecond</Item>
-                <Item Key="LinkOption"></Item>
-                <Item Key="NavBar">Ticket</Item>
-                <Item Key="Type"></Item>
-                <Item Key="Block"></Item>
-                <Item Key="AccessKey">m</Item>
-                <Item Key="Prio">211</Item>
-            </Hash>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###Priority" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
