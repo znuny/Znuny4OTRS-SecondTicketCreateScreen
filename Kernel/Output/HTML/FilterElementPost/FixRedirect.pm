@@ -55,7 +55,7 @@ sub Run {
         && $LayoutObject->{UserCreateNextMask} =~ m{\AAgent(Ticket)?Zoom};
 
     # rewrite redirect
-    ${ $Param{Data} } =~ s{Action=(AgentTicket(Phone|Email))}{Action=$LayoutObject->{Action}};
+    ${ $Param{Data} } =~ s{Action=(AgentTicket(Phone|Email))\b}{Action=$1Second};
 
     return;
 }
