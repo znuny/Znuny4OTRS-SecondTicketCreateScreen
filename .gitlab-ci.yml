@@ -10,4 +10,5 @@ stages:
 job_deploy_otrs_Znuny4OTRSSecondTicketCreateScreen:
   stage: deploy
   script:
+    - sh git config --global push.default current
     - sh /sync_repo.sh git@github.com:znuny/Znuny4OTRS-SecondTicketCreateScreen.git
