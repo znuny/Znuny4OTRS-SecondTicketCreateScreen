@@ -1,4 +1,4 @@
-image: otrs4ci
+image: registry.znuny.com/znuny/docker-otrs4ci:latest
 
 services:
   - name: registry.znuny.com/znuny/docker-mysql-utf8:latest
