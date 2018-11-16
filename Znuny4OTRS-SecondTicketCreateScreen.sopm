@@ -8,17 +8,17 @@
     <Framework>3.1.x</Framework>
     <Framework>3.2.x</Framework>
     <Framework>3.3.x</Framework>
-    <PackageRequired Version="1.0.0">Znuny4OTRS-Repo</PackageRequired>
+    <PackageRequired Version="3.3.2">Znuny4OTRS-Repo</PackageRequired>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">A second ticket create screen (phone and email ticket) to configure with own config settings.</Description>
     <Description Lang="de">Eine zusätzliche Ticket Erstellmaske (Telefon- und Email-Ticket) welche unabhängig konfiguriert werden kann.</Description>
     <Filelist>
-        <File Location="Kernel/Config/Files/Znuny4OTRS-SecondTicketCreateScreen.xml" Permission="644"/>
-        <File Location="Kernel/Modules/AgentTicketPhoneSecond.pm" Permission="644"/>
-        <File Location="Kernel/Modules/AgentTicketEmailSecond.pm" Permission="644"/>
-        <File Location="Kernel/Output/HTML/OutputFilterFixRedirect.pm" Permission="644"/>
-        <File Location="var/httpd/htdocs/js/Core.Agent.CustomerSearch.js" Permission="644"/>
+        <File Permission="644" Location="Kernel/Config/Files/Znuny4OTRS-SecondTicketCreateScreen.xml"/>
+        <File Permission="644" Location="Kernel/Modules/AgentTicketEmailSecond.pm"/>
+        <File Permission="644" Location="Kernel/Modules/AgentTicketPhoneSecond.pm"/>
+        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterFixRedirect.pm"/>
+        <File Permission="644" Location="var/httpd/htdocs/js/Core.Agent.CustomerSearch.js"/>
     </Filelist>
 </otrs_package>
