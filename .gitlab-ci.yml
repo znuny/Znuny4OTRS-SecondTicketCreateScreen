@@ -1,3 +1,4 @@
+## nofilter(TidyAll::Plugin::OTRS::Znuny4OTRS::GitlabciImage)
 image: registry.znuny.com/znuny/docker-otrs4ci:latest
 
 stages:
