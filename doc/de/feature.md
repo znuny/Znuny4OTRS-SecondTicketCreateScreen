@@ -11,8 +11,6 @@ Provides a second phone and email ticket create screen with their own SysConfig 
 
 **Prerequisites**
 
-- Znuny4OTRS-Repo
-
 - OTRS 3.0
 
 - OTRS 3.1
