@@ -12,7 +12,7 @@
     <ChangeLog Version="1.3.1" Date="2015-11-10 14:47:18 UTC">Fixed wrong group for FilterElementPost.</ChangeLog>
     <ChangeLog Version="1.3.0" Date="2015-11-10 11:56:47 UTC">Initial release 5.0.x.</ChangeLog>
     <Framework>5.0.x</Framework>
-    <PackageRequired Version="5.0.13">Znuny4OTRS-Repo</PackageRequired>
+    <PackageRequired Version="5.0.45">Znuny4OTRS-Repo</PackageRequired>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
