@@ -1,6 +1,6 @@
 // --
-// Copyright (C) 2001-2018 OTRS AG, https://otrs.com/
-// Copyright (C) 2012-2018 Znuny GmbH, http://znuny.com/
+// Copyright (C) 2001-2019 OTRS AG, https://otrs.com/
+// Copyright (C) 2012-2019 Znuny GmbH, http://znuny.com/
 // --
 // $origin: otrs - aa71758528888539f6ef7122eb30ec9795a0b7b3 - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 // --
