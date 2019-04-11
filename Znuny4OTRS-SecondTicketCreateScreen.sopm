@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.1">
     <Name>Znuny4OTRS-SecondTicketCreateScreen</Name>
-    <Version>6.0.5</Version>
+    <Version>6.0.6</Version>
+    <ChangeLog Version="6.0.6" Date="2019-04-11 15:39:02 +0200">Fixed navigation setting of SysConfig settings. Added missing translations.</ChangeLog>
     <ChangeLog Version="6.0.5" Date="2018-11-16 16:40:10 +0100">Applied CodePolicy. Repo version update.</ChangeLog>
     <ChangeLog Version="6.0.4" Date="2018-06-05 09:11:38 +0200">Fixed redirect URL.</ChangeLog>
     <ChangeLog Version="6.0.3" Date="2018-04-20 10:02:02 +0200">Fixed configuration structure.</ChangeLog>
