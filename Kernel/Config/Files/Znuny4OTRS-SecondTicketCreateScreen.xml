@@ -156,7 +156,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###Priority" Required="1" Valid="1">
         <Description Translatable="1">Sets the default priority for new email tickets in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <ValidateModule>Kernel::System::SysConfig::PriorityValidate</ValidateModule>
         <Setting>
             <String Regex="">3 normal</String>
@@ -165,7 +165,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###ArticleType" Required="1" Valid="1">
         <Description Translatable="1">Sets the default article type for new email tickets in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <String Regex="">email-external</String>
         </Setting>
@@ -173,7 +173,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###SenderType" Required="1" Valid="1">
         <Description Translatable="1">Sets the default sender type for new email tickets in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <String Regex="">agent</String>
         </Setting>
@@ -181,7 +181,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###Subject" Required="1" Valid="1">
         <Description Translatable="1">Sets the default subject for new email tickets (e.g. 'email Outbound') in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <String Regex=""></String>
         </Setting>
@@ -189,7 +189,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###Body" Required="1" Valid="1">
         <Description Translatable="1">Sets the default text for new email tickets in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <TextArea></TextArea>
         </Setting>
@@ -197,7 +197,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###StateDefault" Required="1" Valid="1">
         <Description Translatable="1">Sets the default next ticket state, after the creation of an email ticket in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <ValidateModule>Kernel::System::SysConfig::StateValidate</ValidateModule>
         <Setting>
             <String Regex="">open</String>
@@ -206,7 +206,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###StateType" Required="1" Valid="1">
         <Description Translatable="1">Determines the next possible ticket states, after the creation of a new email ticket in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <Array>
                 <Item>open</Item>
@@ -219,7 +219,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###HistoryType" Required="1" Valid="1">
         <Description Translatable="1">Defines the history type for the email ticket screen action, which gets used for ticket history in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <String Regex="">EmailAgent</String>
         </Setting>
@@ -227,7 +227,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###HistoryComment" Required="1" Valid="1">
         <Description Translatable="1">Defines the history comment for the email ticket screen action, which gets used for ticket history in the agent interface.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <String Regex=""></String>
         </Setting>
@@ -278,7 +278,7 @@
     <ConfigItem Name="Ticket::Frontend::AgentTicketEmailSecond###DynamicField" Required="0" Valid="1">
         <Description Translatable="1">Dynamic fields shown in the ticket email screen of the agent interface. Possible settings: 0 = Disabled, 1 = Enabled, 2 = Enabled and required.</Description>
         <Group>Znuny4OTRS-SecondTicketCreateScreen</Group>
-        <SubGroup>Frontend::Agent::Ticket::ViewEmailSecondNew</SubGroup>
+        <SubGroup>Frontend::Agent::Ticket::ViewEmailNewSecond</SubGroup>
         <Setting>
             <Hash>
             </Hash>
