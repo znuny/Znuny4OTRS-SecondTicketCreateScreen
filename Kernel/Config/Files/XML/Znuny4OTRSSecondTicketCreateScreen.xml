@@ -236,7 +236,7 @@
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneSecond###IsVisibleForCustomer" Required="1" Valid="1">
         <Description Translatable="1">Sets the default article customer visibility for new phone tickets in the agent interface.</Description>
-        <Navigation>Frontend::Agent::View::TicketPhoneNew</Navigation>
+        <Navigation>Frontend::Agent::View::TicketPhoneNewSecond</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
         </Value>
@@ -436,7 +436,7 @@
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###SplitLinkType" Required="0" Valid="1">
         <Description Translatable="1">Sets the default link type of split tickets in the agent interface.</Description>
-        <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
+        <Navigation>Frontend::Agent::View::TicketEmailNewSecond</Navigation>
         <Value>
             <Hash>
                 <Item Key="LinkType">ParentChild</Item>
@@ -463,7 +463,7 @@
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailSecond###IsVisibleForCustomer" Required="1" Valid="1">
         <Description Translatable="1">Sets the default article customer visibility for new email tickets in the agent interface.</Description>
-        <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
+        <Navigation>Frontend::Agent::View::TicketEmailNewSecond</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
         </Value>
