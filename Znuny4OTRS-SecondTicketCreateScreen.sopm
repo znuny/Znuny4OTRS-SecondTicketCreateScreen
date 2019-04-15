@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.1">
     <Name>Znuny4OTRS-SecondTicketCreateScreen</Name>
-    <Version>5.0.10</Version>
+    <Version>5.0.11</Version>
+    <ChangeLog Version="5.0.11" Date="2019-04-15 09:25:43 +0200">Updated documentation.</ChangeLog>
     <ChangeLog Version="5.0.10" Date="2019-04-15 08:57:31 +0200">Updated documentation.</ChangeLog>
     <ChangeLog Version="5.0.9" Date="2019-04-11 15:38:13 +0200">Fixed navigation setting of SysConfig settings. Added missing translations.</ChangeLog>
     <ChangeLog Version="5.0.8" Date="2018-12-07 14:59:43 +0100">Fixed issue #5 - Wrong encoded prefilled customer data in AgentTicketPhone</ChangeLog>
