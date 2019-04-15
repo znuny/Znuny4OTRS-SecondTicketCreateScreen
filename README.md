@@ -22,8 +22,8 @@ Download the [package](https://addons.znuny.com/api/addon_repos/public/391/lates
 
 Via SysConfig just like for the normal phone and email tickets.
 
-* Admin -> SysConfig -> Znuny4OTRS-SecondTicketCreateScreen -> Frontend =>  Agent  => View =>  TicketPhoneNewSecond
-* Admin -> SysConfig -> Znuny4OTRS-SecondTicketCreateScreen -> Frontend =>  Agent  => View =>  TicketEmailNewSecond
+* Admin -> SysConfig -> Znuny4OTRS-SecondTicketCreateScreen -> Frontend => Agent => Ticket => TicketPhoneNewSecond
+* Admin -> SysConfig -> Znuny4OTRS-SecondTicketCreateScreen -> Frontend => Agent => Ticket => TicketEmailNewSecond
 
 **Download**
 
