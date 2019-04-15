@@ -4,5 +4,5 @@ Die Konfiguration der zweiten Erstellmasken für Telefon- und -E-Mail-Tickets er
 
 Dazu wählen Sie in der Navigation _Znuny4OTRS-SecondTicketCreateScreen_ aus. Dort finden Sie alle relevanten Einstellungen des Add-ons. Die Einstellungen zu den Erstellmasken finden Sie in Frontend => Agent => View:
 
-* Frontend::Agent::Ticket::ViewPhoneNewSecond
-* Frontend::Agent::Ticket::ViewEmailSecondNew
+* Frontend::Agent::View::TicketPhoneNewSecond
+* Frontend::Agent::View::TicketEmailNewSecond
