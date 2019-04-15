@@ -11,30 +11,30 @@ Provides a second phone and email ticket creation screen, each with their own Sy
 
 **Prerequisites**
 
-- Znuny4OTRS-Repo
+- [Znuny4OTRS-Repo](https://www.znuny.com/add-ons/znuny4otrs-repository)
 - OTRS 6
 
 **Installation**
 
-Download the package and install it via admin interface -> package manager or use Znuny4OTRS-Repo.
+Download the [package](https://addons.znuny.com/api/addon_repos/public/1071/latest) and install it via admin interface -> package manager or use [Znuny4OTRS-Repo](https://www.znuny.com/add-ons/znuny4otrs-repository).
 
 **Configuration**
 
 Via SysConfig just like for the normal phone and email tickets.
 
-* Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewPhoneNewSecond
-* Admin -> SysConfig -> Ticket -> Frontend::Agent::Ticket::ViewEmailNewSecond
+* Admin -> SysConfig -> Znuny4OTRS-SecondTicketCreateScreen -> Frontend =>  Agent  => View =>  TicketPhoneNewSecond
+* Admin -> SysConfig -> Znuny4OTRS-SecondTicketCreateScreen -> Frontend =>  Agent  => View =>  TicketEmailNewSecond
 
 **Download**
 
-For download see [http://znuny.com/en/#!/addons](http://znuny.com/en/#!/addons)
+Download the [latest version](https://addons.znuny.com/api/addon_repos/public/1071/latest).
 
 **Commercial Support**
 
-For this extension and for OTRS in general visit [http://znuny.com](http://znuny.com). Looking forward to hear from you!
+For this extension and for OTRS in general visit [https://www.znuny.com](https://www.znuny.com). Looking forward to hear from you!
 
 Enjoy!
 
  Your Znuny Team!
 
- [http://znuny.com](http://znuny.com)
+ [https://www.znuny.com](https://www.znuny.com)
