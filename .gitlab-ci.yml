@@ -3,7 +3,7 @@ image: registry.znuny.com/znuny/docker-otrs6ci:latest
 stages:
   - deploy
 
-job_deploy_otrs_Znuny4OTRSSecondTicketCreateScreen:
+deploy:
   stage: deploy
   script:
     - sh /sync_repo.sh git@github.com:znuny/Znuny4OTRS-SecondTicketCreateScreen.git
