@@ -1,15 +1,13 @@
 // --
-// Copyright (C) 2001-2019 OTRS AG, https://otrs.com/
-// Copyright (C) 2012-2019 Znuny GmbH, http://znuny.com/
+// Copyright (C) 2001-2020 OTRS AG, https://otrs.com/
+// Copyright (C) 2012-2020 Znuny GmbH, http://znuny.com/
 // --
-// $origin: otrs - 63e18b949eb6525e61eb62cfad6af02cd4713501 - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
+// $origin: otrs - acd0ed286f1658db215fdcef46699a8249ccaeda - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
 // did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 // --
-// nofilter(TidyAll::Plugin::OTRS::JavaScript::ESLint)
-// nofilter(TidyAll::Plugin::OTRS::JavaScript::UnloadEvent)
 
 "use strict";
 
@@ -112,8 +110,8 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 // ---
 // Znuny4OTRS-SecondTicketCreateScreen
 // ---
-//            if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') {
-            if (Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1 ) {
+            // if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') {
+            if (Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1) {
 // ---
                 // reset service
                 $('#ServiceID').attr('selectedIndex', 0);
@@ -338,7 +336,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 // Znuny4OTRS-SecondTicketCreateScreen
 // ---
 //        if ( Core.Config.Get('Action') !== 'AgentTicketPhone' ) {
-        if ( Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1 ) {
+        if (Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1) {
 // ---
             return;
         }
@@ -410,6 +408,8 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
      *      Initializes the module.
      */
     TargetNS.Init = function ($Element) {
+        var AutocompleteFocus = false;
+
         // get customer tickets for AgentTicketCustomer
         if (Core.Config.Get('Action') === 'AgentTicketCustomer') {
             GetCustomerTickets($('#CustomerAutoComplete').val(), $('#CustomerID').val());
@@ -423,12 +423,29 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             });
         }
 
+        // Enable free selection or input of CustomerID field on AgentTicketProcess and AgentTicketCustomer.
+        if ((Core.Config.Get('Action') === 'AgentTicketProcess'
+            && !Core.Config.Get('Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly'))
+            ||
+            (Core.Config.Get('Action') === 'AgentTicketCustomer'
+            && !Core.Config.Get('Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly'))
+            ) {
+            $('#CustomerAutoComplete').on('blur keyup' , function() {
+                if($('#CustomerAutoComplete').val()) {
+                    ActivateSelectionCustomerID();
+                }
+                else {
+                    DeactivateSelectionCustomerID();
+                }
+            });
+        }
+
         // get customer tickets for AgentTicketPhone and AgentTicketEmail
 // ---
 // Znuny4OTRS-SecondTicketCreateScreen
 // ---
 //        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') && $('#SelectedCustomerUser').val() !== '') {
-        if ( ( Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1 ) && $('#SelectedCustomerUser').val() !== '' ) {
+        if ((Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1) && $('#SelectedCustomerUser').val() !== '') {
 // ---
             GetCustomerTickets($('#SelectedCustomerUser').val());
         }
@@ -542,14 +559,71 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                 }
             }, 'CustomerSearch');
 
+            // Remember if autocomplete item was focused (by keyboard navigation or mouse).
+            $Element.on('autocompletefocus', function() {
+                AutocompleteFocus = true;
+            });
+
+            if (typeof $Element.data("ui-autocomplete") === 'object') {
+
+                // Remember if the autocomplete widget is left by mouse.
+                $($Element.data("ui-autocomplete").menu.element).on('mouseleave', function() {
+                    AutocompleteFocus = false;
+                });
+
+                // Remember if the autocomplete widget is left by keyboard navigation.
+                // This is done by override the _move method because there is no opposite event of autocompletefocus.
+                $Element.data("ui-autocomplete")._move = function(direction, event) {
+
+                    if (!this.menu.element.is(":visible")) {
+                        this.search(null, event);
+                        return;
+                    }
+
+                    if (this.menu.isFirstItem() && /^previous/.test(direction) ||
+                        this.menu.isLastItem() && /^next/.test(direction)
+                    ) {
+                        this._value(this.term);
+
+                        // Trigger mouseleave for removing selection of autocomplete widget.
+                        $(this.menu.element).trigger('mouseleave');
+
+                        AutocompleteFocus = false;
+                        return;
+                    }
+
+                    this.menu[ direction ](event);
+                };
+            }
+
+            // If autocomplete was focused, but then closed by a blur, clear the search field since this value was
+            //   never explicitly confirmed. Do this also when user decides to click outside the autocomplete list,
+            //   which causes the list to close. Please see bug#13537 for more information.
+            $Element.on('autocompleteclose', function(Event) {
+                if (
+                    AutocompleteFocus
+                    && (
+                        Event.originalEvent === undefined
+                        || (
+                            Event.originalEvent
+                            && Event.originalEvent.type == 'blur'
+                        )
+                    )
+                    )
+                {
+                    $Element.val('');
+                }
+
+                AutocompleteFocus = false;
+            });
+
             if (
-                Core.Config.Get('Action') !== 'AgentTicketCustomer'
 // ---
 // Znuny4OTRS-SecondTicketCreateScreen
 // ---
-//                 && Core.Config.Get('Action') !== 'AgentTicketPhone'
+//                 Core.Config.Get('Action') !== 'AgentTicketPhone'
 //                 && Core.Config.Get('Action') !== 'AgentTicketEmail'
-                && Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1
+                Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1
                 && Core.Config.Get('Action').search(/^AgentTicketEmail.*/) === -1
 // ---
                 && Core.Config.Get('Action') !== 'AgentTicketCompose'
@@ -563,12 +637,14 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                     if (FieldValue !== BackupData.CustomerEmail && FieldValue !== BackupData.CustomerKey) {
                         $('#SelectedCustomerUser').val('');
                         $('#CustomerUserID').val('');
-                        $('#CustomerID').val('');
                         $('#CustomerUserOption').val('');
                         $('#ShowCustomerID').html('');
 
-                        // reset customer info table
-                        $('#CustomerInfo .Content').html(BackupData.CustomerInfo);
+                        // Restore customer info table.
+                        if (Core.Config.Get('Action') !== 'AgentTicketCustomer') {
+                            $('#CustomerInfo .Content').html(BackupData.CustomerInfo);
+                            $('#CustomerID').val('');
+                        }
 
                         if (Core.Config.Get('Action') === 'AgentTicketProcess' && typeof Core.Config.Get('CustomerFieldsToUpdate') !== 'undefined') {
                             // update services (trigger ServiceID change event)
@@ -578,8 +654,8 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                 });
             }
             else {
-                // initializes the customer fields
-                TargetNS.InitCustomerField();
+                // Initializes the customer field.
+                TargetNS.InitCustomerField($Element);
             }
         }
 
@@ -874,76 +950,73 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
      * @name InitCustomerField
      * @memberof Core.Agent.CustomerSearch
      * @function
+     * @param {String} $Element - JQuery object.
      * @description
      *      This function initializes the customer fields.
      */
-    TargetNS.InitCustomerField = function () {
+    TargetNS.InitCustomerField = function ($Element) {
+        var ObjectId = $Element.attr('id');
 
-        // loop over the field with CustomerAutoComplete class
-        $('.CustomerAutoComplete').each(function() {
-            var ObjectId = $(this).attr('id');
+        $('#' + ObjectId).on('change', function () {
 
-            $('#' + ObjectId).on('change', function () {
+            if (!$('#' + ObjectId).val() || $('#' + ObjectId).val() === '') {
+                return false;
+            }
 
-                if (!$('#' + ObjectId).val() || $('#' + ObjectId).val() === '') {
-                    return false;
+            // if autocompletion is disabled and only avaible via the click
+            // of a button next to the input field, we cannot handle this
+            // change event the normal way.
+            if (!Core.UI.Autocomplete.GetConfig('ActiveAutoComplete')) {
+                // we wait some time after this event to check, if the search button
+                // for this field was pressed. If so, no action is needed
+                // If the change event was fired without clicking the search button,
+                // probably the user clicked out of the field.
+                // This should also add the customer (the enetered value) to the list
+
+                if (typeof CustomerFieldChangeRunCount[ObjectId] === 'undefined') {
+                    CustomerFieldChangeRunCount[ObjectId] = 1;
+                }
+                else {
+                    CustomerFieldChangeRunCount[ObjectId]++;
                 }
 
-                // if autocompletion is disabled and only avaible via the click
-                // of a button next to the input field, we cannot handle this
-                // change event the normal way.
-                if (!Core.UI.Autocomplete.GetConfig('ActiveAutoComplete')) {
-                    // we wait some time after this event to check, if the search button
-                    // for this field was pressed. If so, no action is needed
-                    // If the change event was fired without clicking the search button,
-                    // probably the user clicked out of the field.
-                    // This should also add the customer (the enetered value) to the list
-
-                    if (typeof CustomerFieldChangeRunCount[ObjectId] === 'undefined') {
-                        CustomerFieldChangeRunCount[ObjectId] = 1;
-                    }
-                    else {
-                        CustomerFieldChangeRunCount[ObjectId]++;
-                    }
-
-                    if (Core.UI.Autocomplete.SearchButtonClicked[ObjectId]) {
-                        delete CustomerFieldChangeRunCount[ObjectId];
-                        delete Core.UI.Autocomplete.SearchButtonClicked[ObjectId];
+                if (Core.UI.Autocomplete.SearchButtonClicked[ObjectId]) {
+                    delete CustomerFieldChangeRunCount[ObjectId];
+                    delete Core.UI.Autocomplete.SearchButtonClicked[ObjectId];
+                    return false;
+                }
+                else {
+                    if (CustomerFieldChangeRunCount[ObjectId] === 1) {
+                        window.setTimeout(function () {
+                            $('#' + ObjectId).trigger('change');
+                        }, 200);
                         return false;
                     }
-                    else {
-                        if (CustomerFieldChangeRunCount[ObjectId] === 1) {
-                            window.setTimeout(function () {
-                                $('#' + ObjectId).trigger('change');
-                            }, 200);
-                            return false;
-                        }
-                        delete CustomerFieldChangeRunCount[ObjectId];
-                    }
+                    delete CustomerFieldChangeRunCount[ObjectId];
                 }
+            }
 
 
-                // If the autocomplete popup window is visible, delay this change event.
-                // It might be caused by clicking with the mouse into the autocomplete list.
-                // Wait until it is closed to be sure that we don't add a customer twice.
+            // If the autocomplete popup window is visible, delay this change event.
+            // It might be caused by clicking with the mouse into the autocomplete list.
+            // Wait until it is closed to be sure that we don't add a customer twice.
 
-                if ($(this).autocomplete("widget").is(':visible')) {
-                    window.setTimeout(function(){
-                        $('#' + ObjectId).trigger('change');
-                    }, 200);
-                    return false;
-                }
+            if ($Element.autocomplete("widget").is(':visible')) {
+                window.setTimeout(function(){
+                    $('#' + ObjectId).trigger('change');
+                }, 200);
+                return false;
+            }
 
+            Core.Agent.CustomerSearch.AddTicketCustomer(ObjectId, $('#' + ObjectId).val());
+            return false;
+        });
+
+        $('#' + ObjectId).on('keypress', function (e) {
+            if (e.which === 13){
                 Core.Agent.CustomerSearch.AddTicketCustomer(ObjectId, $('#' + ObjectId).val());
                 return false;
-            });
-
-            $('#' + ObjectId).on('keypress', function (e) {
-                if (e.which === 13){
-                    Core.Agent.CustomerSearch.AddTicketCustomer(ObjectId, $('#' + ObjectId).val());
-                    return false;
-                }
-            });
+            }
         });
     };
 
