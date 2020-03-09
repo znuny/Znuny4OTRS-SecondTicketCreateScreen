@@ -1,4 +1,7 @@
-![Znuny logo](http://znuny.com/assets/images/logo_small.png)
+![Znuny logo](https://www.znuny.com/assets/images/logo_small.png)
+
+
+![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-SecondTicketCreateScreen/master)
 
 Znuny4OTRS-SecondTicketCreateScreen
 ===================================
@@ -35,6 +38,6 @@ For this extension and for OTRS in general visit [https://www.znuny.com](https:/
 
 Enjoy!
 
- Your Znuny Team!
+Your Znuny Team!
 
- [https://www.znuny.com](https://www.znuny.com)
+[https://www.znuny.com](https://www.znuny.com)
