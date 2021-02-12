@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.1">
     <Name>Znuny4OTRS-SecondTicketCreateScreen</Name>
-    <Version>6.0.10</Version>
+    <Version>6.0.11</Version>
+    <ChangeLog Version="6.0.11" Date="2021-02-12 17:45:18 +0100">Happy new year. Tidied code.</ChangeLog>
     <ChangeLog Version="6.0.10" Date="2020-04-07 18:04:06 +0200">Tidied code.</ChangeLog>
     <ChangeLog Version="6.0.9" Date="2020-01-13 10:37:29 +0100">Updated customized OTRS files.</ChangeLog>
     <ChangeLog Version="6.0.8" Date="2019-04-15 09:25:17 +0200">Updated documentation.</ChangeLog>
