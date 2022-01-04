@@ -1,8 +1,6 @@
 # Konfiguration
 
-Die Konfiguration der zweiten Erstellmasken für Telefon- und -E-Mail-Tickets erfolgt wie bei den bereits in OTRS vorhandenen über die SysConfig in der OTRS-Administration.
+Die Konfiguration der zweiten Erstellmasken für Telefon- und -E-Mail-Tickets erfolgt wie bei den bereits in Znuny vorhandenen über die SysConfig im Admin-Bereich.
 
-Dazu wählen Sie in der Navigation _Znuny4OTRS-SecondTicketCreateScreen_ aus. Dort finden Sie alle relevanten Einstellungen des Add-ons. Die Einstellungen zu den Erstellmasken finden Sie in Frontend => Agent => View:
-
-* Frontend::Agent::View::TicketPhoneNewSecond
-* Frontend::Agent::View::TicketEmailNewSecond
+* Ticket::Frontend::AgentTicketPhoneSecond
+* Ticket::Frontend::AgentTicketEmailSecond

@@ -51,7 +51,7 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="Loader::Module::AgentTicketPhoneSecond###002-Znuny4OTRS-SecondTicketCreateScreen" Required="0" Valid="1">
+    <Setting Name="Loader::Module::AgentTicketPhoneSecond###002-Znuny-SecondTicketCreateScreen" Required="0" Valid="1">
         <Description Translatable="1">Loader module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
         <Value>
@@ -278,7 +278,7 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="Loader::Module::AgentTicketEmailSecond###002-Znuny4OTRS-SecondTicketCreateScreen" Required="0" Valid="1">
+    <Setting Name="Loader::Module::AgentTicketEmailSecond###002-Znuny-SecondTicketCreateScreen" Required="0" Valid="1">
         <Description Translatable="1">Loader module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
         <Value>
@@ -478,8 +478,8 @@
             </Array>
         </Value>
     </Setting>
-    <!-- Znuny4OTRSAdvancedDynamicFields DynamicFieldScreens registration -->
-    <Setting Name="DynamicFieldScreens###Znuny4OTRS-SecondCreateTicket" Required="1" Valid="1">
+    <!-- ZnunyAdvancedDynamicFields DynamicFieldScreens registration -->
+    <Setting Name="DynamicFieldScreens###Znuny-SecondCreateTicket" Required="1" Valid="1">
         <Description Translatable="1">This configuration defines all possible screens to enable or disable dynamic fields.</Description>
         <Navigation>Core</Navigation>
         <Value>

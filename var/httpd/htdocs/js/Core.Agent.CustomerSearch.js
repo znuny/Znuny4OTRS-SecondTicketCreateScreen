@@ -1,8 +1,8 @@
 // --
-// Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-// Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
+// Copyright (C) 2001-2022 OTRS AG, https://otrs.com/
+// Copyright (C) 2012-2022 Znuny GmbH, http://znuny.com/
 // --
-// $origin: otrs - acd0ed286f1658db215fdcef46699a8249ccaeda - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
+// $origin: otrs - 5ca27d62fd6e9fb6e8019cd22fbe199934c7c958 - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -108,7 +108,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
             // only execute this part, if in AgentTicketEmail or AgentTicketPhone
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
             // if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') {
             if (Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1) {
@@ -283,7 +283,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             // Events for Customer History table - AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer screens.
             if (
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //                 Core.Config.Get('Action') === 'AgentTicketPhone' ||
 //                 Core.Config.Get('Action') === 'AgentTicketEmail' ||
@@ -333,7 +333,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
         // Only operate in AgentTicketPhone
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //        if ( Core.Config.Get('Action') !== 'AgentTicketPhone' ) {
         if (Core.Config.Get('Action').search(/^AgentTicketPhone.*/) === -1) {
@@ -442,7 +442,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
         // get customer tickets for AgentTicketPhone and AgentTicketEmail
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //        if ((Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') && $('#SelectedCustomerUser').val() !== '') {
         if ((Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 || Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1) && $('#SelectedCustomerUser').val() !== '') {
@@ -503,7 +503,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
                 if (
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //                    Core.Config.Get('Action') === 'AgentTicketEmail'
                     Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1
@@ -519,7 +519,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
                 if (
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //                     Core.Config.Get('Action') !== 'AgentTicketPhone'
 //                     && Core.Config.Get('Action') !== 'AgentTicketEmail'
@@ -619,7 +619,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
             if (
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //                 Core.Config.Get('Action') !== 'AgentTicketPhone'
 //                 && Core.Config.Get('Action') !== 'AgentTicketEmail'
@@ -810,7 +810,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         if (
             (
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //                 Core.Config.Get('Action') === 'AgentTicketEmail'
                 Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1
@@ -855,7 +855,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
         if (
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //             Core.Config.Get('Action') === 'AgentTicketEmail'
             Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1
@@ -878,7 +878,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
         if (
             (
 // ---
-// Znuny4OTRS-SecondTicketCreateScreen
+// Znuny-SecondTicketCreateScreen
 // ---
 //                 Core.Config.Get('Action') === 'AgentTicketEmail'
                 Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1
