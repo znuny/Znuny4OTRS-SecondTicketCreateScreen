@@ -2,7 +2,7 @@
 // Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 // Copyright (C) 2012 Znuny GmbH, https://znuny.com/
 // --
-// $origin: otrs - 5ca27d62fd6e9fb6e8019cd22fbe199934c7c958 - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
+// $origin: Znuny - 8013fe55887683ac03bdd9ee452fb658ebd24d65 - var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (GPL). If you
@@ -280,19 +280,22 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             // Init accordion of overview article preview
             Core.UI.Accordion.Init($('.Preview > ul'), 'li h3 a', '.HiddenBlock');
 
-            // Events for Customer History table - AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer screens.
-            if (
 // ---
 // Znuny-SecondTicketCreateScreen
 // ---
+//             // Events for Customer History table - AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer screens.
+//             if (
 //                 Core.Config.Get('Action') === 'AgentTicketPhone' ||
 //                 Core.Config.Get('Action') === 'AgentTicketEmail' ||
+//                 Core.Config.Get('Action') === 'AgentTicketCustomer'
+//                 )
+            // Events for Customer History table - AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer screens.
+            if (
                 Core.Config.Get('Action').search(/^AgentTicketPhone.*/) !== -1 ||
                 Core.Config.Get('Action').search(/^AgentTicketEmail.*/) !== -1 ||
-// ---
-                Core.Config.Get('Action') === 'AgentTicketCustomer' ||
-                Core.Config.Get('Action') === 'AgentChatAppend'
+                Core.Config.Get('Action') === 'AgentTicketCustomer'
                 )
+// ---
             {
                 CustomerHistoryEvents();
             }
@@ -557,6 +560,9 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                 else {
                     TargetNS.AddTicketCustomer($(Event.target).attr('id'), CustomerValue, CustomerKey);
                 }
+
+                Core.App.Publish('Event.Agent.CustomerSearch.Callback', [UI.item]);
+
             }, 'CustomerSearch');
 
             // Remember if autocomplete item was focused (by keyboard navigation or mouse).
@@ -737,7 +743,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             }
 
             // add event handler to radio button
-            if($(this).hasClass('CustomerTicketRadio')) {
+            if($(this).hasClass('RadioRound')) {
 
                 if (TicketCustomerIDs === 0) {
                     $(this).prop('checked', true);
@@ -770,7 +776,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
                     TargetNS.RemoveCustomerTicket($(this));
 
                     // clear CustomerHistory table if there are no selected customer users
-                    if ($('#TicketCustomerContent' + Field + ' .CustomerTicketRadio').length === 0) {
+                    if ($('#TicketCustomerContent' + Field + ' .RadioRound').length === 0) {
                         $('#CustomerTickets').empty();
                     }
                     return false;

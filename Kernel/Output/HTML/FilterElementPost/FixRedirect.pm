@@ -10,6 +10,7 @@ package Kernel::Output::HTML::FilterElementPost::FixRedirect;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',

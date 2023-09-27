@@ -1,6 +1,6 @@
 ![Znuny logo](https://www.znuny.com/assets/images/logo_small.png)
 
-![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-SecondTicketCreateScreen/rel-6_5)
+![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-SecondTicketCreateScreen/rel-7_0)
 
 Znuny-SecondTicketCreateScreen
 ==============================
@@ -8,7 +8,7 @@ Provides a second phone and email ticket creation screen, each with their own Sy
 
 **Prerequisites**
 
-- Znuny 6.5
+- Znuny 7.0
 
 **Installation**
 
