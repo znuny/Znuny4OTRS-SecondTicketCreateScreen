@@ -10,7 +10,6 @@ package Kernel::Language::de_ZnunySecondTicketCreateScreen;
 
 use strict;
 use warnings;
-
 use utf8;
 
 sub Data {
