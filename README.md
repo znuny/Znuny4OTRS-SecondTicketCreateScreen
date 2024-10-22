@@ -1,6 +1,6 @@
 ![Znuny logo](https://www.znuny.com/assets/images/logo_small.png)
 
-![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-SecondTicketCreateScreen/rel-7_0)
+![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-SecondTicketCreateScreen/rel-7_1)
 
 Znuny-SecondTicketCreateScreen
 ==============================
@@ -8,11 +8,11 @@ Provides a second phone and email ticket creation screen, each with their own Sy
 
 **Prerequisites**
 
-- Znuny 7.0
+- Znuny 7.1
 
 **Installation**
 
-Download the [package](https://addons.znuny.com/api/addon_repos/public/2398/latest) and install it via admin interface -> package manager.
+Use the online repository **Znuny Open Source Add-ons** from the package manager to install the add-on. From the command line use this command: `bin/znuny.Console.pl Admin::Package::Install  https://addons.znuny.com/public/:Znuny-SecondTicketCreateScreen`
 
 **Configuration**
 
@@ -21,15 +21,10 @@ Via SysConfig just like for the normal phone and email tickets.
 * Ticket::Frontend::AgentTicketPhoneSecond
 * Ticket::Frontend::AgentTicketEmailSecond
 
-**Download**
+**Commercial Support**
 
-Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2398/latest).
+For this add-on and for Znuny in general visit [www.znuny.com](https://www.znuny.com). Looking forward to hear from you.
 
-**Professional Support**
-
-For this add-on and for Znuny in general visit [www.znuny.com](https://www.znuny.com). Looking forward to hear from you!
-
-Enjoy!
 
 Your Znuny Team!
 
