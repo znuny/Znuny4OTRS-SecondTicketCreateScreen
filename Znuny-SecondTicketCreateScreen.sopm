@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.1">
     <Name>Znuny-SecondTicketCreateScreen</Name>
-    <Version>7.1.1</Version>
+    <Version>7.2.1</Version>
     <Framework>7.2.x</Framework>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">A second ticket create screen (phone and email ticket) to configure with own config settings.</Description>
     <Description Lang="de">Eine zusätzliche Ticket-Erstellmaske (Telefon- und Email-Ticket), welche unabhängig konfiguriert werden kann.</Description>
+    <ChangeLog Version="7.2.1" Date="2025-09-04 12:51:41 +0200">Initial release for Znuny 7.2.</ChangeLog>
     <ChangeLog Version="7.1.1" Date="2024-10-22 16:25:47 +0200">Initial release for Znuny 7.1.</ChangeLog>
     <ChangeLog Version="7.0.1" Date="2023-09-27 18:45:03 +0200">Initial release for Znuny 7.0</ChangeLog>
     <ChangeLog Version="6.5.1" Date="2023-02-20 13:21:29 +0100">Initial release for Znuny 6.5.</ChangeLog>
